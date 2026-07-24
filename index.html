@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UpCanyon — Know before you go</title>
+  <meta name="description" content="Live cams, weather stations, snowpack, rivers, and storm alerts for outdoor Colorado and beyond. Built in Fort Collins." />
+  <link rel="canonical" href="https://upcanyon.app/" />
+  <meta property="og:title" content="UpCanyon — Know before you go" />
+  <meta property="og:description" content="Live cams, weather stations, snowpack, rivers, and storm alerts for outdoor Colorado and beyond. Built in Fort Collins." />
+  <meta property="og:url" content="https://upcanyon.app/" />
+  <meta property="og:type" content="website" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --charcoal: #12161C;
+  --charcoal-deep: #0B0E13;
+  --card: #1A2029;
+  --edge: #2A313C;
+  --snow: #F4F6F8;
+  --snow-dim: #B9C0C9;
+  --snow-faint: #7E8790;
+  --ember: #EA580C;
+  --ember-bright: #F97316;
+}
+* { box-sizing: border-box; }
+html { background: var(--charcoal); }
+body {
+  margin: 0;
+  font-family: 'Montserrat', -apple-system, 'Segoe UI', sans-serif;
+  color: var(--snow);
+  background: var(--charcoal);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 22px; }
+a { color: var(--ember-bright); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+header.site {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 0;
+}
+.brand { font-weight: 800; font-size: 18px; letter-spacing: 0.14em; color: var(--snow); }
+.brand span { color: var(--ember-bright); }
+nav.site a { color: var(--snow-dim); font-weight: 600; font-size: 14px; margin-left: 22px; }
+
+.hero { padding: 72px 0 56px; }
+.hero h1 {
+  font-size: clamp(40px, 7vw, 64px);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+  margin: 0 0 18px; text-wrap: balance;
+}
+.hero p.sub { font-size: 19px; color: var(--snow-dim); max-width: 620px; margin: 0 0 30px; }
+.cta {
+  display: inline-block; background: var(--ember); color: #fff;
+  font-weight: 700; font-size: 15px; letter-spacing: 0.04em;
+  padding: 14px 26px; border-radius: 10px;
+}
+.cta:hover { background: var(--ember-bright); text-decoration: none; }
+
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; padding: 8px 0 40px; }
+.feature {
+  background: var(--card); border: 1px solid var(--edge);
+  border-left: 4px solid var(--ember);
+  border-radius: 10px; padding: 22px;
+}
+.feature h3 { margin: 0 0 8px; font-size: 17px; font-weight: 800; letter-spacing: -0.01em; }
+.feature p { margin: 0; color: var(--snow-dim); font-size: 15px; }
+
+.trust { padding: 8px 0 56px; }
+.trust p { color: var(--snow-faint); font-size: 14.5px; max-width: 680px; }
+
+.contact { background: var(--card); border: 1px solid var(--edge); border-radius: 10px; padding: 26px; margin-bottom: 64px; }
+.contact h2 { margin: 0 0 6px; font-size: 20px; font-weight: 800; }
+.contact p { margin: 0; color: var(--snow-dim); }
+
+footer.site {
+  border-top: 1px solid var(--edge);
+  padding: 26px 0 44px; color: var(--snow-faint); font-size: 13.5px;
+}
+footer.site a { color: var(--snow-dim); }
+footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
+
+/* Legal pages */
+.legalpage { padding: 40px 0 72px; }
+.legalpage .uc-legal { max-width: 760px; margin: 0; }
+.uc-legal h1 { font-size: 2em; line-height: 1.15; margin: 0 0 0.4em; letter-spacing: -0.02em; }
+.uc-legal h2 { font-size: 1.35em; margin: 1.8em 0 0.4em; letter-spacing: -0.01em; }
+.uc-legal h3 { font-size: 1.08em; margin: 1.4em 0 0.3em; }
+.uc-legal p { margin: 0.7em 0; color: var(--snow-dim); }
+.uc-legal ul { margin: 0.7em 0; padding-left: 1.4em; }
+.uc-legal li { margin: 0.35em 0; color: var(--snow-dim); }
+.uc-legal strong { color: var(--snow); }
+.uc-legal hr { border: none; border-top: 1px solid var(--edge); margin: 2em 0; }
+.uc-tablewrap { overflow-x: auto; margin: 1em 0; }
+.uc-legal table { border-collapse: collapse; width: 100%; font-size: 0.92em; }
+.uc-legal th, .uc-legal td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--edge); vertical-align: top; color: var(--snow-dim); }
+.uc-legal th { font-weight: 700; color: var(--snow); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <a class="brand" href="/">UP<span>CANYON</span></a>
+      <nav class="site">
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="mailto:hello@upcanyon.app">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Know before you go.</h1>
+      <p class="sub">Live cams, weather stations, snowpack, rivers, and storm
+      alerts for the places you actually go — built in Fort Collins for
+      people who get outside.</p>
+      <a class="cta" href="mailto:hello@upcanyon.app?subject=UpCanyon%20beta">Coming soon to iOS &amp; Android</a>
+    </section>
+    <section class="features">
+      <div class="feature">
+        <h3>See it, don't guess it</h3>
+        <p>Thousands of live cameras — passes, highways, trailheads, rivers —
+        next to the stations, snowpack, and streamflow that tell you what's
+        really happening.</p>
+      </div>
+      <div class="feature">
+        <h3>It watches your spots</h3>
+        <p>Pin the places you care about and UpCanyon taps you when it
+        matters: severe weather, storms inbound, fresh snow, a wildfire
+        nearby, smoke in the air.</p>
+      </div>
+      <div class="feature">
+        <h3>Put your mountains on the TV</h3>
+        <p>Cast View turns any TV into a live conditions dashboard — cams,
+        weather, and snow for your pinned spots, rotating while you make
+        coffee.</p>
+      </div>
+    </section>
+    <section class="trust">
+      <p>UpCanyon reads from the sources that report the ground truth — NOAA
+      and the National Weather Service, USGS river gauges, USDA SNOTEL
+      snowpack, EPA AirNow, state DOT cameras, NIFC wildfire data — and shows
+      you where every number came from.</p>
+    </section>
+    <section class="contact">
+      <h2>Questions, ideas, a cam we're missing?</h2>
+      <p><a href="mailto:hello@upcanyon.app">hello@upcanyon.app</a> — it goes
+      straight to the person who builds the app.</p>
+    </section>
+
+    <footer class="site">
+      <div>© 2026 UpCanyon LLC · Fort Collins, Colorado · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="mailto:hello@upcanyon.app">hello@upcanyon.app</a></div>
+      <div class="legalnote">Weather data: NOAA/NWS, USGS, USDA NRCS, EPA AirNow, and partners. Not for life-safety use — always heed official warnings.</div>
+    </footer>
+  </div>
+</body>
+</html>
