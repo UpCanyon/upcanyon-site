@@ -213,6 +213,16 @@ main { position: relative; z-index: 1; }
 }
 .rowcap b { color: var(--snow); }
 
+.betaform { display: flex; gap: 10px; flex-wrap: wrap; align-items: stretch; }
+.betaform input[type="email"] {
+  flex: 1 1 220px; min-width: 200px; padding: 13px 16px; border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06);
+  color: var(--snow); font-family: inherit; font-size: 15px; font-weight: 600;
+}
+.betaform input[type="email"]::placeholder { color: var(--snow-faint); }
+.betaform input[type="email"]:focus { outline: 2px solid var(--ember-bright); border-color: transparent; }
+.betathanks { color: var(--snow); font-weight: 800; font-size: 17px; }
+
 /* Reserve every screenshot's box BEFORE its lazy image loads — kills the
    layout shift that made anchor jumps land on the wrong section for
    cold-cache visitors (all phone shots are 603x1311; Diamond is its
@@ -424,8 +434,8 @@ footer.site .legalnote { margin-top: 10px; font-size: 13px; font-weight: 400; co
       </div>
 
       <div class="rv d3">
-        <a class="cta" href="mailto:hello@upcanyon.app?subject=UpCanyon%20beta">Coming soon to iOS &amp; Android</a>
-        <a class="cta ghost" href="mailto:hello@upcanyon.app?subject=UpCanyon%20beta%20tester">Join the beta</a>
+        <span class="cta" style="cursor: default;">Coming soon to iOS &amp; Android</span>
+        <a class="cta ghost" href="/#contact">Join the beta</a>
       </div>
 
       <div class="scrollcue rv d4">The tour</div>
@@ -652,7 +662,14 @@ footer.site .legalnote { margin-top: 10px; font-size: 13px; font-weight: 400; co
           <p><a href="mailto:hello@upcanyon.app">hello@upcanyon.app</a> &mdash; it goes
           straight to the person who builds the app.</p>
         </div>
-        <a class="cta" href="mailto:hello@upcanyon.app?subject=UpCanyon%20beta%20tester">Join the beta</a>
+        <form class="betaform" action="https://formsubmit.co/hello@upcanyon.app" method="POST">
+          <input type="hidden" name="_subject" value="UpCanyon beta signup" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="https://upcanyon.app/?beta=thanks#contact" />
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+          <input type="email" name="email" required placeholder="you@email.com" aria-label="Your email" />
+          <button class="cta" type="submit">Join the beta</button>
+        </form>
       </div>
     </section>
   </main>
@@ -740,6 +757,16 @@ footer.site .legalnote { margin-top: 10px; font-size: 13px; font-weight: 400; co
         setTimeout(function () { alignContact('smooth'); }, 900);
       });
     });
+    // Post-signup return (?beta=thanks): swap the form for a confirmation.
+    if (/[?&]beta=thanks/.test(location.search)) {
+      var bf = document.querySelector('.betaform');
+      if (bf) {
+        var ok = document.createElement('p');
+        ok.className = 'betathanks';
+        ok.textContent = "You're on the list — talk soon. ⛰";
+        bf.replaceWith(ok);
+      }
+    }
     if (location.hash === '#contact') {
       window.addEventListener('load', function () {
         setTimeout(function () { alignContact('auto'); }, 60);
