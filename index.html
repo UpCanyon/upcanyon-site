@@ -221,7 +221,11 @@ main { position: relative; z-index: 1; }
 .diamond img, .print img { aspect-ratio: 1311 / 603; object-fit: cover; }
 .tv img, .tvscreen img { aspect-ratio: 1914 / 1072; object-fit: cover; }
 
-/* The Diamond — landscape hero image, medium size, framed like a print. */
+/* The Diamond — landscape framed print; lives beside the hero copy. */
+.herogrid { display: flex; align-items: center; gap: clamp(28px, 4vw, 64px); flex-wrap: wrap; }
+.herocopy { flex: 1 1 480px; min-width: 300px; }
+.diamond.herocam { flex: 1 1 460px; min-width: 300px; margin: 0; }
+@media (max-width: 900px) { .diamond.herocam { margin-top: 34px; } }
 .diamond {
   margin: clamp(56px, 8vh, 96px) auto 0; max-width: 780px; position: relative; z-index: 1;
   border-radius: 22px; overflow: hidden;
@@ -405,6 +409,8 @@ footer.site .legalnote { margin-top: 10px; font-size: 13px; font-weight: 400; co
   <main>
     <!-- ═══ HERO ═══ -->
     <section class="scene hero" data-scene="hero">
+      <div class="herogrid">
+      <div class="herocopy">
       <h1 class="rv">Know before <em>you go.</em></h1>
       <p class="sub rv d1">Live cameras, real weather stations, radar nowcasts,
       snowpack, and rivers — for the drive up the canyon, the trailhead, and
@@ -423,6 +429,13 @@ footer.site .legalnote { margin-top: 10px; font-size: 13px; font-weight: 400; co
       </div>
 
       <div class="scrollcue rv d4">The tour</div>
+      </div>
+
+      <figure class="diamond herocam rv d2" data-plx="0.03">
+        <img src="/assets/shots/cam-longs-peak-diamond.png" alt="Live camera view of the Diamond face of Longs Peak under storm light, seen full-screen in UpCanyon" fetchpriority="high" />
+        <figcaption><b>Live in the app right now:</b> the Diamond, Longs Peak.</figcaption>
+      </figure>
+      </div>
     </section>
 
     <!-- ═══ 01 · HOME ═══ -->
@@ -488,10 +501,6 @@ footer.site .legalnote { margin-top: 10px; font-size: 13px; font-weight: 400; co
       </div>
       <p class="rowcap rv d4">One map, every layer: <b>17,000+ cameras &middot; live weather
       stations &middot; river gauges</b> reporting real flow.</p>
-      <figure class="diamond rv" data-plx="0.03">
-        <img src="/assets/shots/cam-longs-peak-diamond.png" alt="Live camera view of the Diamond face of Longs Peak under storm light, seen full-screen in UpCanyon" loading="lazy" />
-        <figcaption>Straight off the <b>Cams layer</b>: the Diamond, Longs Peak &mdash; live.</figcaption>
-      </figure>
     </section>
 
     <!-- ═══ 03 · LOCAL / TEMPEST ═══ -->
