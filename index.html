@@ -205,7 +205,9 @@ main { position: relative; z-index: 1; }
 .trio-row .phone:nth-child(2) { transform: rotate(1.5deg) translateY(34px); }
 .trio-row .phone:nth-child(3) { transform: rotate(3.5deg) translateY(10px); }
 .trio-row .phone:hover { transform: rotate(0deg) translateY(-6px) scale(1.03); }
-.rowcap {
+/* p.rowcap must OUTRANK the generic .scene p rule (max-width 34em,
+   no auto margins) or captions center inside a narrow left-pinned box. */
+.scene p.rowcap, .rowcap {
   text-align: center; color: var(--snow-dim); font-size: clamp(15px, 1.3vw, 16.5px);
   font-weight: 600; max-width: 46em; margin: 56px auto 0; position: relative; z-index: 1;
 }
@@ -346,7 +348,7 @@ footer.site .legalnote { margin-top: 10px; font-size: 13px; font-weight: 400; co
   .story .media { margin-top: 10px; }
   .num { font-size: clamp(90px, 26vw, 160px); -webkit-text-stroke-width: 1.5px; }
   .trio-row .phone:nth-child(n) { transform: rotate(0deg) translateY(0); }
-  .rowcap { margin-top: 30px; }
+  .scene p.rowcap { margin: 30px auto 0; }
   .pair { flex-wrap: wrap; gap: 18px; }
   .pair .phone, .pair .phone:first-child, .pair .phone:last-child {
     transform: none; margin: 0; width: min(100%, 320px);
