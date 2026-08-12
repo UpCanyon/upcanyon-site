@@ -56,22 +56,22 @@ body {
 .sky .aurora {
   position: absolute; inset: -30%;
   background:
-    radial-gradient(ellipse 55% 40% at 30% 25%, rgba(99, 102, 241, 0.16), transparent 65%),
-    radial-gradient(ellipse 50% 35% at 72% 45%, rgba(34, 211, 238, 0.10), transparent 60%);
-  animation: aurora 28s ease-in-out infinite alternate;
+    radial-gradient(ellipse 55% 42% at 28% 24%, rgba(124, 58, 237, 0.42), transparent 65%),
+    radial-gradient(ellipse 50% 36% at 74% 42%, rgba(34, 211, 238, 0.26), transparent 60%);
+  animation: aurora 14s ease-in-out infinite alternate;
 }
 @keyframes aurora {
-  from { transform: translate(0, 0) scale(1); opacity: 0.9; }
-  to   { transform: translate(5%, 4%) scale(1.1); opacity: 0.6; }
+  from { transform: translate(-3%, -2%) scale(1); filter: hue-rotate(0deg); opacity: 1; }
+  to   { transform: translate(6%, 5%) scale(1.14); filter: hue-rotate(-30deg); opacity: 0.75; }
 }
 .sky .glow {
-  position: absolute; left: -10%; right: -10%; bottom: -12%; height: 46%;
-  background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(234, 88, 12, 0.22), transparent 70%);
-  animation: emberglow 13s ease-in-out infinite alternate;
+  position: absolute; left: -10%; right: -10%; bottom: -12%; height: 58%;
+  background: radial-gradient(ellipse 72% 62% at 50% 100%, rgba(234, 88, 12, 0.45), transparent 72%);
+  animation: emberglow 8s ease-in-out infinite alternate;
 }
 @keyframes emberglow {
-  from { opacity: 0.5; }
-  to   { opacity: 1; transform: translateY(-2%); }
+  from { opacity: 0.55; transform: translateY(1.5%) scaleY(0.96); }
+  to   { opacity: 1; transform: translateY(-2.5%) scaleY(1.05); }
 }
 /* Grain of stars, top third only */
 .sky .stars {
@@ -161,6 +161,11 @@ nav.site a { color: var(--snow-dim); font-weight: 600; font-size: 14px; margin-l
 .rowpics.four .ph { flex: 0 1 170px; min-width: 140px; }
 .rowcap { color: var(--snow-dim); font-size: 15px; line-height: 1.5; padding: 10px 0 22px; }
 .ph.diamond { max-width: 640px; }
+.band { border-radius: 18px; padding: 8px 22px; margin: 14px 0; }
+.band.a { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.05); }
+.band.b { background: rgba(124, 58, 237, 0.10); border: 1px solid rgba(124,58,237,0.14); }
+.band .rowpics { padding-top: 18px; }
+.band > section.block { padding-top: 20px; }
 .shot.wide { flex-basis: 100%; }
 .shot.wide figcaption {
   padding: 12px 16px; font-size: 14.5px; color: var(--snow-dim);
@@ -272,7 +277,7 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
     </section>
 
 
-    <section class="story">
+    <section class="story band a">
       <div class="ph"><img src="/assets/shots/home-hero-fort-collins-nowcast.png" alt="UpCanyon home screen: a live Fort Collins camera behind the current temperature, with a nowcast card reading storm arriving in about 25 minutes" loading="lazy" /></div>
       <div class="txt">
         <h2>Your home screen is a live camera.</h2>
@@ -287,14 +292,16 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
       </div>
     </section>
 
+    <div class="band b">
     <div class="rowpics">
       <div class="ph"><img src="/assets/shots/alert-air-quality-modal.png" alt="Air quality reading of 90, Moderate, from a real EPA sensor with an active alert explained" loading="lazy" /></div>
       <div class="ph"><img src="/assets/shots/home-uv-index-modal.png" alt="UV index panel showing the hourly UV curve and the peak sun window" loading="lazy" /></div>
       <div class="ph"><img src="/assets/shots/forecast-history-same-day-years.png" alt="Weather history comparing this same date across seven years" loading="lazy" /></div>
     </div>
     <p class="rowcap">Air quality from real sensors, UV with its peak window, and years of history behind every reading &mdash; one tap from home.</p>
+    </div>
 
-    <section class="story rev">
+    <section class="story band a">
       <div class="ph"><img src="/assets/shots/map-radar-front-range.png" alt="Live radar sweeping the Colorado Front Range with a time scrubber to play the storm forward" loading="lazy" /></div>
       <div class="txt">
         <h2>Watch the storm, not the forecast.</h2>
@@ -306,6 +313,7 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
       </div>
     </section>
 
+    <div class="band b">
     <div class="rowpics">
       <div class="ph"><img src="/assets/shots/map-cams-western-us-clusters.png" alt="Map of the western United States showing thousands of clustered camera locations" loading="lazy" /></div>
       <div class="ph"><img src="/assets/shots/map-wx-stations-poudre-mountains.png" alt="Mountain weather stations reporting live temperatures across the Poudre Canyon high country" loading="lazy" /></div>
@@ -316,9 +324,10 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
       <img src="/assets/shots/cam-longs-peak-diamond.png" alt="Live camera view of the Diamond face of Longs Peak under storm light, seen full-screen in UpCanyon" loading="lazy" />
       <figcaption style="padding: 12px 16px; font-size: 14.5px; color: var(--snow-dim); border-top: 1px solid rgba(255,255,255,0.08);">Straight off the Cams layer: the Diamond, Longs Peak &mdash; live.</figcaption>
     </figure>
+    </div>
 
 
-    <section class="story">
+    <section class="story band a">
       <div class="ph"><img src="/assets/shots/map-local-tempest.png" alt="Hyperlocal Tempest weather stations reporting from the Red Feather Lakes area where no official station exists" loading="lazy" /></div>
       <div class="txt">
         <h2>Hyperlocal, where official stations don&rsquo;t reach.</h2>
@@ -330,7 +339,7 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
       </div>
     </section>
 
-    <section class="story rev">
+    <section class="story band b">
       <div class="ph"><img src="/assets/shots/list-poudre-climbing-beta.png" alt="A pinned list called Poudre Climbing Beta with live cameras and a Cast button" loading="lazy" /></div>
       <div class="ph"><img src="/assets/shots/list-poudre-summary-cam-tiles.png" alt="The same list summary view with a live Cameron Pass camera tile" loading="lazy" /></div>
       <div class="txt">
@@ -341,7 +350,7 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
       </div>
     </section>
 
-    <section class="story">
+    <section class="story band a">
       <div class="ph"><img src="/assets/shots/cast-broadcast-list-picker.png" alt="Choosing a pinned list to broadcast to a TV with Cast View, showing a live broadcasting status" loading="lazy" /></div>
       <div class="txt">
         <h2>Then put it on the TV.</h2>
@@ -351,7 +360,7 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
       </div>
     </section>
 
-    <section class="story rev">
+    <section class="story band b">
       <div class="ph"><img src="/assets/shots/locker-themes-pro.png" alt="The Locker screen with UpCanyon Pro and unlockable app themes like Founders Edition and Twilight" loading="lazy" /></div>
       <div class="txt">
         <h2>Make it yours.</h2>
@@ -361,6 +370,7 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
       </div>
     </section>
 
+    <div class="band a">
     <section class="block" style="padding-bottom:0;">
       <h2>And it works anywhere in the country.</h2>
       <p class="lead">Search any US town and get the same treatment.
@@ -375,6 +385,7 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
       <div class="ph"><img src="/assets/shots/conditions-streamflow-wood-river.png" alt="The Wood River gauge near Grand Island with a 12-hour flow chart and historical comparison" loading="lazy" /></div>
     </div>
     <p class="rowcap">Search &rarr; conditions &rarr; nearest cam &rarr; the river gauge. Every number sourced, everywhere in the US.</p>
+    </div>
 
     <section class="block">
       <h2>Put your mountains on the TV.</h2>
