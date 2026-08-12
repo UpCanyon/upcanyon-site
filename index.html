@@ -213,6 +213,14 @@ main { position: relative; z-index: 1; }
 }
 .rowcap b { color: var(--snow); }
 
+/* Reserve every screenshot's box BEFORE its lazy image loads — kills the
+   layout shift that made anchor jumps land on the wrong section for
+   cold-cache visitors (all phone shots are 603x1311; Diamond is its
+   landscape twin; the Cast View render is ~16:9). */
+.phone img { aspect-ratio: 603 / 1311; object-fit: cover; }
+.diamond img, .print img { aspect-ratio: 1311 / 603; object-fit: cover; }
+.tv img, .tvscreen img { aspect-ratio: 1914 / 1072; object-fit: cover; }
+
 /* The Diamond — landscape hero image, medium size, framed like a print. */
 .diamond {
   margin: clamp(56px, 8vh, 96px) auto 0; max-width: 780px; position: relative; z-index: 1;
