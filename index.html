@@ -629,7 +629,7 @@ footer.site .legalnote { margin-top: 10px; font-size: 13px; font-weight: 400; co
         weather, and for nothing else.</p>
       </div>
 
-      <div class="contactcard rv" id="contact">
+      <div class="contactcard rv" id="contact" style="scroll-margin-top: 90px;">
         <div>
           <h2>Questions, ideas, a cam we&rsquo;re missing?</h2>
           <p><a href="mailto:hello@upcanyon.app">hello@upcanyon.app</a> &mdash; it goes
@@ -706,6 +706,27 @@ footer.site .legalnote { margin-top: 10px; font-size: 13px; font-weight: 400; co
         if (!ticking) { ticking = true; window.requestAnimationFrame(applyPlx); }
       }, { passive: true });
       applyPlx();
+    }
+
+    // Anchor scrolls drift when lazy images above the target finish
+    // loading mid-scroll (user report: Contact landed on Cast View).
+    // Correct: smooth-scroll on click, then re-align once layout
+    // settles; same correction on page load for /#contact arrivals.
+    var alignContact = function (behavior) {
+      var el = document.getElementById('contact');
+      if (el) el.scrollIntoView({ behavior: behavior, block: 'start' });
+    };
+    document.querySelectorAll('a[href$="#contact"]').forEach(function (a) {
+      a.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        alignContact('smooth');
+        setTimeout(function () { alignContact('smooth'); }, 900);
+      });
+    });
+    if (location.hash === '#contact') {
+      window.addEventListener('load', function () {
+        setTimeout(function () { alignContact('auto'); }, 60);
+      });
     }
   })();
   </script>
