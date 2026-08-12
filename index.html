@@ -51,27 +51,28 @@ body {
      is meant to be NOTICED. Stands down for prefers-reduced-motion. ── */
 .sky {
   position: fixed; inset: 0; z-index: -2; overflow: hidden;
-  background: linear-gradient(180deg, #10151d 0%, #131822 60%, #0e1218 100%);
+  background: linear-gradient(180deg, #0e1319 0%, #121826 55%, #0d1117 100%);
 }
-.sky .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5; }
-.sky .b1 {
-  width: 62vmax; height: 62vmax; left: -12vmax; top: -20vmax;
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.55), transparent 65%);
-  animation: blob1 26s ease-in-out infinite alternate;
+.sky .aurora {
+  position: absolute; inset: -30%;
+  background:
+    radial-gradient(ellipse 55% 40% at 30% 25%, rgba(99, 102, 241, 0.16), transparent 65%),
+    radial-gradient(ellipse 50% 35% at 72% 45%, rgba(34, 211, 238, 0.10), transparent 60%);
+  animation: aurora 28s ease-in-out infinite alternate;
 }
-.sky .b2 {
-  width: 55vmax; height: 55vmax; right: -16vmax; top: 8vmax;
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.38), transparent 65%);
-  animation: blob2 31s ease-in-out infinite alternate;
+@keyframes aurora {
+  from { transform: translate(0, 0) scale(1); opacity: 0.9; }
+  to   { transform: translate(5%, 4%) scale(1.1); opacity: 0.6; }
 }
-.sky .b3 {
-  width: 70vmax; height: 48vmax; left: 12vmax; bottom: -24vmax;
-  background: radial-gradient(circle, rgba(234, 88, 12, 0.5), transparent 65%);
-  animation: blob3 21s ease-in-out infinite alternate;
+.sky .glow {
+  position: absolute; left: -10%; right: -10%; bottom: -12%; height: 46%;
+  background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(234, 88, 12, 0.22), transparent 70%);
+  animation: emberglow 13s ease-in-out infinite alternate;
 }
-@keyframes blob1 { to { transform: translate(14vmax, 9vmax) scale(1.18); filter: blur(90px) hue-rotate(-35deg); } }
-@keyframes blob2 { to { transform: translate(-12vmax, 14vmax) scale(1.25); filter: blur(90px) hue-rotate(45deg); } }
-@keyframes blob3 { to { transform: translate(-10vmax, -12vmax) scale(1.12); filter: blur(90px) hue-rotate(28deg); } }
+@keyframes emberglow {
+  from { opacity: 0.5; }
+  to   { opacity: 1; transform: translateY(-2%); }
+}
 /* Grain of stars, top third only */
 .sky .stars {
   position: absolute; inset: 0 0 55% 0;
@@ -86,7 +87,7 @@ body {
 }
 @keyframes twinkle { from { opacity: 0.5; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
-  .sky .blob, .sky .stars { animation: none; }
+  .sky .aurora, .sky .glow, .sky .stars { animation: none; }
 }
 
 .wrap { max-width: 960px; margin: 0 auto; padding: 0 22px; }
@@ -152,19 +153,20 @@ nav.site a { color: var(--snow-dim); font-weight: 600; font-size: 14px; margin-l
 .story .txt { flex: 1 1 320px; min-width: 260px; }
 .story .txt h2 { font-size: clamp(22px, 3.4vw, 30px); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 10px; }
 .story .txt p { color: var(--snow-dim); line-height: 1.6; margin: 0 0 10px; font-size: 15.5px; }
-.story .ph { flex: 0 1 280px; }
+.story .ph { flex: 0 1 250px; }
 .ph { border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 20px 50px rgba(0,0,0,0.45); background: var(--card-solid); }
 .ph img { display: block; width: 100%; height: auto; }
-.rowpics { display: flex; gap: 16px; flex-wrap: wrap; padding: 10px 0 2px; }
-.rowpics .ph { flex: 1 1 200px; min-width: 160px; }
-.rowpics.four .ph { flex: 1 1 160px; min-width: 140px; }
-.rowcap { color: var(--snow-faint); font-size: 13.5px; padding: 10px 0 20px; }
+.rowpics { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; padding: 10px 0 2px; }
+.rowpics .ph { flex: 0 1 190px; min-width: 150px; }
+.rowpics.four .ph { flex: 0 1 170px; min-width: 140px; }
+.rowcap { color: var(--snow-dim); font-size: 15px; line-height: 1.5; padding: 10px 0 22px; }
+.ph.diamond { max-width: 640px; }
 .shot.wide { flex-basis: 100%; }
 .shot.wide figcaption {
-  padding: 10px 16px; font-size: 13px; color: var(--snow-faint);
+  padding: 12px 16px; font-size: 14.5px; color: var(--snow-dim);
   border-top: 1px solid rgba(255,255,255,0.08);
 }
-.shotcaption { text-align: center; color: var(--snow-faint); font-size: 13px; padding: 26px 0 30px; }
+.shotcaption { text-align: center; color: var(--snow-dim); font-size: 15px; padding: 26px 0 30px; }
 
 .stack { display: flex; flex-direction: column; gap: 20px; flex: 0 1 340px; }
 
@@ -240,7 +242,7 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
 </style>
 </head>
 <body>
-  <div class="sky" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="stars"></div></div>
+  <div class="sky" aria-hidden="true"><div class="aurora"></div><div class="glow"></div><div class="stars"></div></div>
 
   <div class="wrap">
     <header class="site">
@@ -269,12 +271,6 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
       <a class="cta ghost" href="mailto:hello@upcanyon.app?subject=UpCanyon%20beta%20tester">Join the beta</a>
     </section>
 
-    <section class="shots" aria-label="Live camera view">
-      <figure class="shot wide" style="margin:0;">
-        <img src="/assets/shots/cam-longs-peak-diamond.png" alt="Live camera view of the Diamond face of Longs Peak under storm light, seen full-screen in UpCanyon" loading="lazy" />
-        <figcaption>Live in the app: the Diamond, Longs Peak &mdash; one of 17,000+ cameras.</figcaption>
-      </figure>
-    </section>
 
     <section class="story">
       <div class="ph"><img src="/assets/shots/home-hero-fort-collins-nowcast.png" alt="UpCanyon home screen: a live Fort Collins camera behind the current temperature, with a nowcast card reading storm arriving in about 25 minutes" loading="lazy" /></div>
@@ -316,6 +312,11 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
       <div class="ph"><img src="/assets/shots/map-water-streamflow-poudre.png" alt="USGS river gauges reporting live streamflow along the Poudre River" loading="lazy" /></div>
     </div>
     <p class="rowcap">One map, every layer: 17,000+ cameras &middot; live weather stations &middot; river gauges reporting real flow.</p>
+    <figure class="ph diamond" style="margin: 6px auto 0;">
+      <img src="/assets/shots/cam-longs-peak-diamond.png" alt="Live camera view of the Diamond face of Longs Peak under storm light, seen full-screen in UpCanyon" loading="lazy" />
+      <figcaption style="padding: 12px 16px; font-size: 14.5px; color: var(--snow-dim); border-top: 1px solid rgba(255,255,255,0.08);">Straight off the Cams layer: the Diamond, Longs Peak &mdash; live.</figcaption>
+    </figure>
+
 
     <section class="story">
       <div class="ph"><img src="/assets/shots/map-local-tempest.png" alt="Hyperlocal Tempest weather stations reporting from the Red Feather Lakes area where no official station exists" loading="lazy" /></div>
