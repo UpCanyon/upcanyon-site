@@ -46,46 +46,32 @@ body {
      slides across the sky, and an ember glow breathing at the horizon.
      Transform/opacity only, GPU-cheap, and it stands down for
      prefers-reduced-motion. ── */
+/* ── Morphing backdrop — three big color blobs drifting, scaling, and
+     hue-shifting on 20-30s cycles over the app's charcoal. The movement
+     is meant to be NOTICED. Stands down for prefers-reduced-motion. ── */
 .sky {
   position: fixed; inset: 0; z-index: -2; overflow: hidden;
-  background: linear-gradient(180deg, #171225 0%, #1c1430 30%, #2b1a33 55%, #12161C 100%);
+  background: linear-gradient(180deg, #10151d 0%, #131822 60%, #0e1218 100%);
 }
-.sky .phase {
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, #0d1b2a 0%, #14213d 35%, #1b2a4a 60%, #101820 100%);
-  opacity: 0; animation: phase 90s ease-in-out infinite;
+.sky .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5; }
+.sky .b1 {
+  width: 62vmax; height: 62vmax; left: -12vmax; top: -20vmax;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.55), transparent 65%);
+  animation: blob1 26s ease-in-out infinite alternate;
 }
-@keyframes phase {
-  0%, 18%   { opacity: 0; }
-  40%, 60%  { opacity: 0.85; }
-  82%, 100% { opacity: 0; }
+.sky .b2 {
+  width: 55vmax; height: 55vmax; right: -16vmax; top: 8vmax;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.38), transparent 65%);
+  animation: blob2 31s ease-in-out infinite alternate;
 }
-.sky::before {
-  content: ""; position: absolute; inset: -40%;
-  background:
-    radial-gradient(ellipse 60% 45% at 25% 30%, rgba(96, 61, 160, 0.35), transparent 65%),
-    radial-gradient(ellipse 55% 40% at 75% 60%, rgba(34, 211, 238, 0.10), transparent 60%);
-  animation: drift 46s ease-in-out infinite alternate, huecycle 75s ease-in-out infinite alternate;
+.sky .b3 {
+  width: 70vmax; height: 48vmax; left: 12vmax; bottom: -24vmax;
+  background: radial-gradient(circle, rgba(234, 88, 12, 0.5), transparent 65%);
+  animation: blob3 21s ease-in-out infinite alternate;
 }
-.sky::after {
-  content: ""; position: absolute; inset: -20%;
-  background:
-    radial-gradient(ellipse 80% 30% at 50% 96%, rgba(234, 88, 12, 0.28), transparent 70%),
-    radial-gradient(ellipse 40% 22% at 30% 100%, rgba(249, 115, 22, 0.18), transparent 65%);
-  animation: breathe 18s ease-in-out infinite alternate;
-}
-@keyframes huecycle {
-  from { filter: hue-rotate(0deg); }
-  to   { filter: hue-rotate(-38deg); }
-}
-@keyframes drift {
-  from { transform: translate3d(-4%, -2%, 0) scale(1); }
-  to   { transform: translate3d(4%, 3%, 0) scale(1.08); }
-}
-@keyframes breathe {
-  from { opacity: 0.65; transform: translateY(1.5%); }
-  to   { opacity: 1;    transform: translateY(-1.5%); }
-}
+@keyframes blob1 { to { transform: translate(14vmax, 9vmax) scale(1.18); filter: blur(90px) hue-rotate(-35deg); } }
+@keyframes blob2 { to { transform: translate(-12vmax, 14vmax) scale(1.25); filter: blur(90px) hue-rotate(45deg); } }
+@keyframes blob3 { to { transform: translate(-10vmax, -12vmax) scale(1.12); filter: blur(90px) hue-rotate(28deg); } }
 /* Grain of stars, top third only */
 .sky .stars {
   position: absolute; inset: 0 0 55% 0;
@@ -100,7 +86,7 @@ body {
 }
 @keyframes twinkle { from { opacity: 0.5; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
-  .sky::before, .sky::after, .sky .stars, .sky .phase { animation: none; }
+  .sky .blob, .sky .stars { animation: none; }
 }
 
 .wrap { max-width: 960px; margin: 0 auto; padding: 0 22px; }
@@ -112,8 +98,7 @@ header.site {
   padding: 22px 0;
 }
 .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: 0.02em; color: var(--snow); }
-.brand img { width: 34px; height: 34px; }
-.brand span { color: var(--ember-bright); }
+.brand img { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.92); padding: 3px; }
 nav.site a { color: var(--snow-dim); font-weight: 600; font-size: 14px; margin-left: 22px; }
 
 .hero { padding: 64px 0 30px; text-align: left; }
@@ -162,6 +147,18 @@ nav.site a { color: var(--snow-dim); font-weight: 600; font-size: 14px; margin-l
 }
 .shot img { display: block; width: 100%; height: auto; }
 .shot.tall { flex-basis: 300px; }
+.story { display: flex; gap: 30px; align-items: center; flex-wrap: wrap; padding: 34px 0 8px; }
+.story.rev { flex-direction: row-reverse; }
+.story .txt { flex: 1 1 320px; min-width: 260px; }
+.story .txt h2 { font-size: clamp(22px, 3.4vw, 30px); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 10px; }
+.story .txt p { color: var(--snow-dim); line-height: 1.6; margin: 0 0 10px; font-size: 15.5px; }
+.story .ph { flex: 0 1 280px; }
+.ph { border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 20px 50px rgba(0,0,0,0.45); background: var(--card-solid); }
+.ph img { display: block; width: 100%; height: auto; }
+.rowpics { display: flex; gap: 16px; flex-wrap: wrap; padding: 10px 0 2px; }
+.rowpics .ph { flex: 1 1 200px; min-width: 160px; }
+.rowpics.four .ph { flex: 1 1 160px; min-width: 140px; }
+.rowcap { color: var(--snow-faint); font-size: 13.5px; padding: 10px 0 20px; }
 .shot.wide { flex-basis: 100%; }
 .shot.wide figcaption {
   padding: 10px 16px; font-size: 13px; color: var(--snow-faint);
@@ -243,11 +240,11 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
 </style>
 </head>
 <body>
-  <div class="sky" aria-hidden="true"><div class="phase"></div><div class="stars"></div></div>
+  <div class="sky" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="stars"></div></div>
 
   <div class="wrap">
     <header class="site">
-      <a class="brand" href="/"><img src="/assets/logo.png" alt="" />UP<span>CANYON</span></a>
+      <a class="brand" href="/"><img src="/assets/logo.png" alt="" />UpCanyon</a>
       <nav class="site">
         <a href="https://cast.upcanyon.app">Cast&nbsp;View</a>
         <a href="/privacy/">Privacy</a>
@@ -275,53 +272,108 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
     <section class="shots" aria-label="Live camera view">
       <figure class="shot wide" style="margin:0;">
         <img src="/assets/shots/cam-longs-peak-diamond.png" alt="Live camera view of the Diamond face of Longs Peak under storm light, seen full-screen in UpCanyon" loading="lazy" />
-        <figcaption>Live in the app right now: the Diamond, Longs Peak — one of 17,000+ cameras.</figcaption>
+        <figcaption>Live in the app: the Diamond, Longs Peak &mdash; one of 17,000+ cameras.</figcaption>
       </figure>
     </section>
 
-    <section class="shots" aria-label="App screenshots">
-      <div class="shot tall"><img src="/assets/shots/home-hero-fort-collins-nowcast.png" alt="UpCanyon home screen — live Fort Collins cam behind the current temperature, with a nowcast card reading storm arriving in about 25 minutes" loading="lazy" /></div>
-      <div class="shot tall"><img src="/assets/shots/map-radar-front-range.png" alt="Live radar sweeping the Colorado Front Range with a time scrubber to play the storm forward" loading="lazy" /></div>
-      <div class="shot tall"><img src="/assets/shots/list-poudre-climbing-beta.png" alt="A pinned list called Poudre Climbing Beta with live cameras and a Cast button" loading="lazy" /></div>
-    </section>
-
-    <section class="shots" aria-label="More app screenshots">
-      <div class="shot tall"><img src="/assets/shots/map-cam-longs-peak-popup.png" alt="Satellite map of Rocky Mountain National Park with the Longs Peak camera preview popped open" loading="lazy" /></div>
-      <div class="shot tall"><img src="/assets/shots/forecast-7day-sky-tonight.png" alt="Seven-day forecast cards plus a Sky Tonight panel showing a new moon and the Perseids peaking" loading="lazy" /></div>
-      <div class="shot tall"><img src="/assets/shots/conditions-streamflow-wood-river.png" alt="USGS river streamflow with a 12-hour flow chart and comparison against historical levels" loading="lazy" /></div>
-    </section>
-    <p class="shotcaption">Real screens, real data — an August storm day on the Front Range.</p>
-
-    <section class="block">
-      <h2>The ground truth, not the guess.</h2>
-      <p class="lead">Most apps interpolate a model to your zip code. UpCanyon
-      shows you the weather station up the road, the camera pointed at the
-      pass, and the radar cell that's actually headed your way — and tells
-      you where every number came from.</p>
-
-      <div class="features">
-        <div class="feature">
-          <h3>See it, don't guess it</h3>
-          <p>Thousands of live cameras — road, trailhead, summit — next to
-          real stations, SNOTEL snowpack, and river gauges.</p>
-        </div>
-        <div class="feature">
-          <h3>Storms, on a clock</h3>
-          <p>Radar nowcasting tracks cells near you and tells you when the
-          rain actually arrives — not "40% chance today."</p>
-        </div>
-        <div class="feature">
-          <h3>It watches your spots</h3>
-          <p>Pin the places you care about and get tapped when it matters:
-          severe weather, fresh snow, rising water, smoke in the air.</p>
-        </div>
-        <div class="feature cyan">
-          <h3>Years of hindsight</h3>
-          <p>Multi-year history on every station — compare this season
-          against the last six, day by day or month by month.</p>
-        </div>
+    <section class="story">
+      <div class="ph"><img src="/assets/shots/home-hero-fort-collins-nowcast.png" alt="UpCanyon home screen: a live Fort Collins camera behind the current temperature, with a nowcast card reading storm arriving in about 25 minutes" loading="lazy" /></div>
+      <div class="txt">
+        <h2>Your home screen is a live camera.</h2>
+        <p>Open the app and you&rsquo;re looking at the sky &mdash; a real camera near
+        you, not a stock photo. It picks one automatically; swap it for any
+        camera you like from the map. No camera nearby? You get a clean
+        weather animation instead.</p>
+        <p><strong>The nowcast, in plain English:</strong> UpCanyon watches
+        the actual radar cells moving toward you, works out their speed and
+        track, and tells you when the rain reaches <em>your spot</em> &mdash;
+        &ldquo;storm arriving in ~25 min,&rdquo; not &ldquo;40% chance today.&rdquo;</p>
       </div>
     </section>
+
+    <div class="rowpics">
+      <div class="ph"><img src="/assets/shots/alert-air-quality-modal.png" alt="Air quality reading of 90, Moderate, from a real EPA sensor with an active alert explained" loading="lazy" /></div>
+      <div class="ph"><img src="/assets/shots/home-uv-index-modal.png" alt="UV index panel showing the hourly UV curve and the peak sun window" loading="lazy" /></div>
+      <div class="ph"><img src="/assets/shots/forecast-history-same-day-years.png" alt="Weather history comparing this same date across seven years" loading="lazy" /></div>
+    </div>
+    <p class="rowcap">Air quality from real sensors, UV with its peak window, and years of history behind every reading &mdash; one tap from home.</p>
+
+    <section class="story rev">
+      <div class="ph"><img src="/assets/shots/map-radar-front-range.png" alt="Live radar sweeping the Colorado Front Range with a time scrubber to play the storm forward" loading="lazy" /></div>
+      <div class="txt">
+        <h2>Watch the storm, not the forecast.</h2>
+        <p>Open the map and put the radar in motion &mdash; scrub it backward to
+        see where the storm has been, forward to see where it is headed.</p>
+        <p>Then use the filter bar to layer live cameras on top of the
+        radar and <em>look inside the storm</em> &mdash; pick a camera under the
+        cell and see what is actually falling, basically in real time.</p>
+      </div>
+    </section>
+
+    <div class="rowpics">
+      <div class="ph"><img src="/assets/shots/map-cams-western-us-clusters.png" alt="Map of the western United States showing thousands of clustered camera locations" loading="lazy" /></div>
+      <div class="ph"><img src="/assets/shots/map-wx-stations-poudre-mountains.png" alt="Mountain weather stations reporting live temperatures across the Poudre Canyon high country" loading="lazy" /></div>
+      <div class="ph"><img src="/assets/shots/map-water-streamflow-poudre.png" alt="USGS river gauges reporting live streamflow along the Poudre River" loading="lazy" /></div>
+    </div>
+    <p class="rowcap">One map, every layer: 17,000+ cameras &middot; live weather stations &middot; river gauges reporting real flow.</p>
+
+    <section class="story">
+      <div class="ph"><img src="/assets/shots/map-local-tempest.png" alt="Hyperlocal Tempest weather stations reporting from the Red Feather Lakes area where no official station exists" loading="lazy" /></div>
+      <div class="txt">
+        <h2>Hyperlocal, where official stations don&rsquo;t reach.</h2>
+        <p>The Local layer reads from a network of Tempest home weather
+        stations &mdash; real backyard instruments reporting every minute, in
+        the canyons and small towns where no official station exists.</p>
+        <p>Access is limited to Northern Colorado for now &mdash; expansion is in
+        the works. Shoutout to Tempest for making this possible.</p>
+      </div>
+    </section>
+
+    <section class="story rev">
+      <div class="ph"><img src="/assets/shots/list-poudre-climbing-beta.png" alt="A pinned list called Poudre Climbing Beta with live cameras and a Cast button" loading="lazy" /></div>
+      <div class="ph"><img src="/assets/shots/list-poudre-summary-cam-tiles.png" alt="The same list summary view with a live Cameron Pass camera tile" loading="lazy" /></div>
+      <div class="txt">
+        <h2>Save the places you care about.</h2>
+        <p>Build lists &mdash; your climbing spots, the drive to work, the town
+        where your parents live &mdash; and check on all of them in one glance:
+        live cams, current conditions, alerts if something changes.</p>
+      </div>
+    </section>
+
+    <section class="story">
+      <div class="ph"><img src="/assets/shots/cast-broadcast-list-picker.png" alt="Choosing a pinned list to broadcast to a TV with Cast View, showing a live broadcasting status" loading="lazy" /></div>
+      <div class="txt">
+        <h2>Then put it on the TV.</h2>
+        <p>Any list can broadcast to Cast View &mdash; pick the list on your
+        phone and your TV becomes a live dashboard of those spots,
+        refreshing on its own while you make coffee.</p>
+      </div>
+    </section>
+
+    <section class="story rev">
+      <div class="ph"><img src="/assets/shots/locker-themes-pro.png" alt="The Locker screen with UpCanyon Pro and unlockable app themes like Founders Edition and Twilight" loading="lazy" /></div>
+      <div class="txt">
+        <h2>Make it yours.</h2>
+        <p>Themes, a customizable home, your own hero cam &mdash; the app bends
+        to how you use it. Pro unlocks unlimited pins, alerts, multi-year
+        history, and Cast View, with a pay-once Lifetime option.</p>
+      </div>
+    </section>
+
+    <section class="block" style="padding-bottom:0;">
+      <h2>And it works anywhere in the country.</h2>
+      <p class="lead">Search any US town and get the same treatment.
+      Here is Grand Island, Nebraska: current conditions read from a real
+      station, the nearest live camera 18 miles up the road, and the local
+      river gauge with its history.</p>
+    </section>
+    <div class="rowpics four">
+      <div class="ph"><img src="/assets/shots/conditions-search.png" alt="Searching for a location in UpCanyon" loading="lazy" /></div>
+      <div class="ph"><img src="/assets/shots/conditions-now-grand-island.png" alt="Current conditions for Grand Island, Nebraska" loading="lazy" /></div>
+      <div class="ph"><img src="/assets/shots/conditions-nearest-cam-aurora.png" alt="The nearest live camera to Grand Island, 18 miles away in Aurora, Nebraska" loading="lazy" /></div>
+      <div class="ph"><img src="/assets/shots/conditions-streamflow-wood-river.png" alt="The Wood River gauge near Grand Island with a 12-hour flow chart and historical comparison" loading="lazy" /></div>
+    </div>
+    <p class="rowcap">Search &rarr; conditions &rarr; nearest cam &rarr; the river gauge. Every number sourced, everywhere in the US.</p>
 
     <section class="block">
       <h2>Put your mountains on the TV.</h2>
@@ -329,7 +381,7 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
       conditions dashboard — cams, weather, and snow for your pinned spots,
       rotating while you make coffee.</p>
       <div class="castband">
-        <img src="/assets/shot-cast.jpg" alt="Cast View dashboard on a TV — live camera, current conditions, and the hourly forecast for Fort Collins" loading="lazy" />
+        <img src="/assets/shots/castview.png" alt="Cast View dashboard on a TV — live camera, current conditions, and the hourly forecast for Fort Collins" loading="lazy" />
         <div class="inner">
           <h3>Pairs in seconds</h3>
           <p>Open <a href="https://cast.upcanyon.app">cast.upcanyon.app</a> on
