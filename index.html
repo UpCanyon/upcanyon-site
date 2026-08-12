@@ -50,12 +50,22 @@ body {
   position: fixed; inset: 0; z-index: -2; overflow: hidden;
   background: linear-gradient(180deg, #171225 0%, #1c1430 30%, #2b1a33 55%, #12161C 100%);
 }
+.sky .phase {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, #0d1b2a 0%, #14213d 35%, #1b2a4a 60%, #101820 100%);
+  opacity: 0; animation: phase 90s ease-in-out infinite;
+}
+@keyframes phase {
+  0%, 18%   { opacity: 0; }
+  40%, 60%  { opacity: 0.85; }
+  82%, 100% { opacity: 0; }
+}
 .sky::before {
   content: ""; position: absolute; inset: -40%;
   background:
     radial-gradient(ellipse 60% 45% at 25% 30%, rgba(96, 61, 160, 0.35), transparent 65%),
     radial-gradient(ellipse 55% 40% at 75% 60%, rgba(34, 211, 238, 0.10), transparent 60%);
-  animation: drift 46s ease-in-out infinite alternate;
+  animation: drift 46s ease-in-out infinite alternate, huecycle 75s ease-in-out infinite alternate;
 }
 .sky::after {
   content: ""; position: absolute; inset: -20%;
@@ -63,6 +73,10 @@ body {
     radial-gradient(ellipse 80% 30% at 50% 96%, rgba(234, 88, 12, 0.28), transparent 70%),
     radial-gradient(ellipse 40% 22% at 30% 100%, rgba(249, 115, 22, 0.18), transparent 65%);
   animation: breathe 18s ease-in-out infinite alternate;
+}
+@keyframes huecycle {
+  from { filter: hue-rotate(0deg); }
+  to   { filter: hue-rotate(-38deg); }
 }
 @keyframes drift {
   from { transform: translate3d(-4%, -2%, 0) scale(1); }
@@ -86,7 +100,7 @@ body {
 }
 @keyframes twinkle { from { opacity: 0.5; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
-  .sky::before, .sky::after, .sky .stars { animation: none; }
+  .sky::before, .sky::after, .sky .stars, .sky .phase { animation: none; }
 }
 
 .wrap { max-width: 960px; margin: 0 auto; padding: 0 22px; }
@@ -97,7 +111,7 @@ header.site {
   display: flex; align-items: center; justify-content: space-between;
   padding: 22px 0;
 }
-.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: 0.14em; color: var(--snow); }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: 0.02em; color: var(--snow); }
 .brand img { width: 34px; height: 34px; }
 .brand span { color: var(--ember-bright); }
 nav.site a { color: var(--snow-dim); font-weight: 600; font-size: 14px; margin-left: 22px; }
@@ -148,8 +162,11 @@ nav.site a { color: var(--snow-dim); font-weight: 600; font-size: 14px; margin-l
 }
 .shot img { display: block; width: 100%; height: auto; }
 .shot.tall { flex-basis: 300px; }
-.shot.tilt-l { transform: rotate(-1.6deg) translateY(10px); }
-.shot.tilt-r { transform: rotate(1.4deg) translateY(22px); }
+.shot.wide { flex-basis: 100%; }
+.shot.wide figcaption {
+  padding: 10px 16px; font-size: 13px; color: var(--snow-faint);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
 .shotcaption { text-align: center; color: var(--snow-faint); font-size: 13px; padding: 26px 0 30px; }
 
 .stack { display: flex; flex-direction: column; gap: 20px; flex: 0 1 340px; }
@@ -221,13 +238,12 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
 .uc-legal th { font-weight: 700; color: var(--snow); }
 
 @media (max-width: 700px) {
-  .shot.tilt-l, .shot.tilt-r { transform: none; }
   .cta.ghost { margin-left: 0; margin-top: 10px; }
 }
 </style>
 </head>
 <body>
-  <div class="sky" aria-hidden="true"><div class="stars"></div></div>
+  <div class="sky" aria-hidden="true"><div class="phase"></div><div class="stars"></div></div>
 
   <div class="wrap">
     <header class="site">
@@ -256,15 +272,25 @@ footer.site .legalnote { margin-top: 10px; font-size: 12.5px; }
       <a class="cta ghost" href="mailto:hello@upcanyon.app?subject=UpCanyon%20beta%20tester">Join the beta</a>
     </section>
 
-    <section class="shots" aria-label="App screenshots">
-      <div class="shot tall tilt-l"><img src="/assets/shot-home.jpg" alt="UpCanyon home screen — live cam of the foothills with the current temperature, air quality, and UV readouts over it" loading="lazy" /></div>
-      <div class="stack">
-        <div class="shot"><img src="/assets/shot-forecast.png" alt="24-hour forecast curve with per-hour temperature, rain, and wind readouts" loading="lazy" /></div>
-        <div class="shot"><img src="/assets/shot-station.png" alt="Live conditions card reading from an actual NWS weather station less than a mile away" loading="lazy" /></div>
-      </div>
-      <div class="shot tall tilt-r"><img src="/assets/shot-map.jpg" alt="Map covered in live temperature readings from real weather stations" loading="lazy" /></div>
+    <section class="shots" aria-label="Live camera view">
+      <figure class="shot wide" style="margin:0;">
+        <img src="/assets/shots/cam-longs-peak-diamond.png" alt="Live camera view of the Diamond face of Longs Peak under storm light, seen full-screen in UpCanyon" loading="lazy" />
+        <figcaption>Live in the app right now: the Diamond, Longs Peak — one of 17,000+ cameras.</figcaption>
+      </figure>
     </section>
-    <p class="shotcaption">Real screens, real data — a hot August afternoon in Fort Collins.</p>
+
+    <section class="shots" aria-label="App screenshots">
+      <div class="shot tall"><img src="/assets/shots/home-hero-fort-collins-nowcast.png" alt="UpCanyon home screen — live Fort Collins cam behind the current temperature, with a nowcast card reading storm arriving in about 25 minutes" loading="lazy" /></div>
+      <div class="shot tall"><img src="/assets/shots/map-radar-front-range.png" alt="Live radar sweeping the Colorado Front Range with a time scrubber to play the storm forward" loading="lazy" /></div>
+      <div class="shot tall"><img src="/assets/shots/list-poudre-climbing-beta.png" alt="A pinned list called Poudre Climbing Beta with live cameras and a Cast button" loading="lazy" /></div>
+    </section>
+
+    <section class="shots" aria-label="More app screenshots">
+      <div class="shot tall"><img src="/assets/shots/map-cam-longs-peak-popup.png" alt="Satellite map of Rocky Mountain National Park with the Longs Peak camera preview popped open" loading="lazy" /></div>
+      <div class="shot tall"><img src="/assets/shots/forecast-7day-sky-tonight.png" alt="Seven-day forecast cards plus a Sky Tonight panel showing a new moon and the Perseids peaking" loading="lazy" /></div>
+      <div class="shot tall"><img src="/assets/shots/conditions-streamflow-wood-river.png" alt="USGS river streamflow with a 12-hour flow chart and comparison against historical levels" loading="lazy" /></div>
+    </section>
+    <p class="shotcaption">Real screens, real data — an August storm day on the Front Range.</p>
 
     <section class="block">
       <h2>The ground truth, not the guess.</h2>
