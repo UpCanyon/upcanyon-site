@@ -88,28 +88,37 @@ footer.site {
       <div class="uc-legal">
         <h1>Delete Your Data</h1>
         <p><strong>UpCanyon</strong> — published by <strong>UpCanyon LLC</strong> on the App Store and Google Play.</p>
-        <p class="updated">Last updated: August 2026</p>
+        <p class="updated">Last updated: October 2026</p>
 
-        <p>UpCanyon has <strong>no user accounts</strong>, so there is no account to close. The App holds only two kinds of data, and you can delete both — in the App or with one email.</p>
+        <p>Accounts in UpCanyon are <strong>optional</strong>. Whether or not you signed in, you can delete everything the App holds, in the App or with one email.</p>
 
-        <h2>Delete everything in the App (fastest)</h2>
+        <h2>If you signed in: delete your account</h2>
         <ol>
-          <li>Open UpCanyon and go to <strong>Account → Account Actions</strong>.</li>
-          <li>Tap <strong>"Reset app data."</strong> This permanently erases everything stored on your device: preferences, pinned spots, lists, home spot, and trial state.</li>
-          <li>If you created alerts, delete them (or turn off alert channels) before resetting — that removes the matching server-side records automatically.</li>
+          <li>Open UpCanyon and tap the gear to open <strong>Settings</strong>.</li>
+          <li>Scroll to the bottom and tap <strong>"Delete account."</strong></li>
+          <li>Confirm. Your account and everything backed up to it are deleted immediately: your email and name, your pins, lists, saved places, unit preferences, and the alerts tied to the account. This cannot be undone.</li>
+        </ol>
+        <p>Deleting the account does not erase what is stored on the phone itself. Use the next section for that.</p>
+
+        <h2>Erase what is on your phone</h2>
+        <ol>
+          <li>Open UpCanyon and tap the gear to open <strong>Settings</strong>.</li>
+          <li>Under <strong>Purchases &amp; data</strong>, tap <strong>"Reset app data."</strong> This permanently erases everything stored on your device: preferences, pinned spots, lists, saved places, and trial state.</li>
+          <li>If you created alerts without signing in, delete them (or turn off alert channels) before resetting. That removes the matching server-side records.</li>
         </ol>
 
         <h2>Or request deletion by email</h2>
-        <p>Email <a href="mailto:hello@upcanyon.app?subject=Data%20deletion%20request">hello@upcanyon.app</a> with the subject <strong>"Data deletion request."</strong> No proof of identity is needed — server data is keyed to an anonymous install ID, not to your name or email. We complete deletion requests within <strong>30 days</strong> (usually much faster) and confirm by reply.</p>
+        <p>Email <a href="mailto:hello@upcanyon.app?subject=Data%20deletion%20request">hello@upcanyon.app</a> with the subject <strong>"Data deletion request."</strong> If you have an account, write from the email address you signed in with. If you never signed in, no proof of identity is needed: server data is keyed to an anonymous install ID, not to your name or email. We complete deletion requests within <strong>30 days</strong> (usually much faster) and confirm by reply.</p>
 
         <h2>What is deleted, what is kept</h2>
         <div class="uc-tablewrap">
         <table>
           <tr><th>Data</th><th>Where it lives</th><th>On deletion</th></tr>
-          <tr><td>Preferences, pinned spots, lists, home spot, trial state</td><td>Your device only</td><td>Erased immediately by "Reset app data" (or by uninstalling the App)</td></tr>
+          <tr><td>Preferences, pinned spots, lists, saved places, trial state</td><td>Your device</td><td>Erased immediately by "Reset app data" (or by uninstalling the App)</td></tr>
+          <tr><td>Account: email, name, and the backup of your pins, lists, saved places and units</td><td>Our servers (only if you signed in)</td><td>Deleted immediately by "Delete account" in the App, or on email request</td></tr>
           <tr><td>Alert rules and the pinned spots they watch</td><td>Our servers (only if you enabled alerts)</td><td>Deleted when you delete the alerts, or on email request</td></tr>
           <tr><td>Anonymous install ID and push notification token</td><td>Our servers (only if you enabled alerts)</td><td>Deleted on request; dead push tokens are purged automatically</td></tr>
-          <tr><td>Crash reports (Sentry)</td><td>Sentry, anonymized</td><td>Age out automatically; you can opt out in Account → Notifications &amp; Privacy</td></tr>
+          <tr><td>Crash reports (Sentry)</td><td>Sentry, anonymized</td><td>Age out automatically; you can opt out in Settings → Notifications</td></tr>
           <tr><td>Purchase records</td><td>Apple, Google, and RevenueCat</td><td>Retained by those platforms per their policies (required for refunds and restoring purchases); we never see payment details</td></tr>
           <tr><td>Support emails</td><td>Our inbox</td><td>Kept up to 2 years for follow-up, deleted sooner on request</td></tr>
         </table>
