@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Camera Use Policy — UpCanyon</title>
+  <meta name="description" content="How UpCanyon shows public webcams: credited, live-only, never archived or resold, with controls for the people who run the cameras." />
+  <link rel="canonical" href="https://upcanyon.app/cameras/" />
+  <meta property="og:title" content="Camera Use Policy — UpCanyon" />
+  <meta property="og:description" content="How UpCanyon shows public webcams: credited, live-only, never archived or resold, with controls for the people who run the cameras." />
+  <meta property="og:url" content="https://upcanyon.app/cameras/" />
+  <meta property="og:type" content="website" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --charcoal: #0F141B;
+  --charcoal-deep: #0B0E13;
+  --card: rgba(255,255,255,0.045);
+  --edge: rgba(255,255,255,0.10);
+  --snow: #F4F6F8;
+  --snow-dim: #C9D1DA;
+  --snow-faint: #8B939D;
+  --ember: #EA580C;
+  --ember-bright: #F97316;
+}
+* { box-sizing: border-box; }
+html { background: var(--charcoal); }
+body {
+  margin: 0;
+  font-family: 'Montserrat', -apple-system, 'Segoe UI', sans-serif;
+  color: var(--snow);
+  background: var(--charcoal);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+/* Calm static ambience — echoes the landing page's lava without motion. */
+.ambient { position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 38% at 18% 8%, rgba(124,58,237,0.16), transparent 65%),
+    radial-gradient(ellipse 55% 45% at 88% 92%, rgba(234,88,12,0.14), transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 15%, rgba(34,211,238,0.08), transparent 60%);
+}
+a { color: var(--ember-bright); text-decoration: none; }
+a:hover { text-decoration: underline; }
+header.site {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px clamp(20px, 6vw, 96px); position: sticky; top: 0; z-index: 50;
+  background: rgba(14, 18, 24, 0.72);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: 0.02em; color: var(--snow); }
+.brand img { width: 46px; height: 46px; object-fit: contain; }
+nav.site a { color: var(--snow-dim); font-weight: 700; font-size: 14px; margin-left: 22px; }
+main.legalpage { max-width: 820px; margin: 0 auto; padding: 48px clamp(20px, 5vw, 40px) 80px; }
+.uc-legal h1 { font-size: clamp(34px, 5vw, 48px); font-weight: 800; line-height: 1.08; margin: 0 0 0.4em; letter-spacing: -0.025em; }
+.uc-legal h2 { font-size: 1.4em; font-weight: 800; margin: 2em 0 0.5em; letter-spacing: -0.01em; }
+.uc-legal h3 { font-size: 1.08em; font-weight: 800; margin: 1.6em 0 0.4em; }
+.uc-legal p, .uc-legal li { color: var(--snow-dim); font-size: 15.5px; }
+.uc-legal strong { color: var(--snow); }
+.uc-legal .updated { color: var(--snow-faint); font-weight: 600; font-size: 14px; }
+.uc-legal table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+.uc-legal th, .uc-legal td { border: 1px solid var(--edge); padding: 9px 12px; text-align: left; color: var(--snow-dim); }
+.uc-legal th { color: var(--snow); background: var(--card); }
+.uc-legal blockquote { border-left: 3px solid var(--ember); margin: 1em 0; padding: 8px 18px; background: var(--card); border-radius: 0 10px 10px 0; }
+.uc-legal .eyebrow { color: var(--ember-bright); font-weight: 800; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 10px; }
+.uc-legal .lede { font-size: 17px; color: var(--snow-dim); }
+.uc-legal .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0 8px; }
+.uc-legal .two > div { background: var(--card); border: 1px solid var(--edge); border-radius: 12px; padding: 14px 16px; }
+.uc-legal .two h3 { margin: 0 0 6px; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; }
+.uc-legal .two ul { margin: 0; padding-left: 18px; }
+.uc-legal .two li { font-size: 14.5px; margin: 4px 0; }
+.uc-legal .two .yes h3 { color: #4ADE80; } .uc-legal .two .no h3 { color: var(--ember-bright); }
+.uc-legal .uc-tablewrap { overflow-x: auto; }
+.uc-legal dl { margin: 0; } .uc-legal dt { color: var(--snow); font-weight: 800; margin-top: 14px; } .uc-legal dd { margin: 4px 0 0; color: var(--snow-dim); font-size: 15.5px; }
+@media (max-width: 640px) { .uc-legal .two { grid-template-columns: 1fr; } }
+footer.site {
+  padding: 26px clamp(20px, 6vw, 96px) 44px; color: var(--snow-faint); font-size: 14px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+footer.site .legalnote { margin-top: 8px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="wrap">
+    <header class="site">
+      <a class="brand" href="/"><img src="/assets/logo-white.png" alt="" />UpCanyon</a>
+      <nav class="site">
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="legalpage">
+      <div class="uc-legal">
+<p class="eyebrow">For camera providers</p>
+<h1>Camera Use Policy</h1>
+<p><strong>UpCanyon LLC</strong> · Fort Collins, Colorado</p>
+<p class="updated">Version 1 · October 5, 2026</p>
+<p class="lede">UpCanyon is a weather and conditions app that puts public webcams on a map next to the forecast, so a person can look at a pass, a trailhead, a harbor or a beach before they go. More than 30,000 cameras across all 50 states, nearly all from public agencies, universities and research institutions, each credited to its source with a link back.</p>
+<p>Several of the people who run those cameras have asked for our rules in writing before saying yes. This page is that document. It describes exactly how the app fetches and shows a camera image, what we will never do with it, and the controls every provider has. If your institution needs a signature, we will put this on letterhead and sign it; email <a href="mailto:hello@upcanyon.app">hello@upcanyon.app</a>.</p>
+<hr />
+<h2>The short version</h2>
+<div class="two">
+  <div class="yes"><h3>We do</h3><ul>
+    <li>Show the current still your site already publishes, as published</li>
+    <li>Credit you by name on the image and link to your page</li>
+    <li>Fetch only while someone is looking, on a cadence you can set</li>
+    <li>Keep every camera in the free app, never behind a paywall</li>
+    <li>Remove a camera within one business day when you ask</li>
+  </ul></div>
+  <div class="no"><h3>We never</h3><ul>
+    <li>Record, archive, or build time-lapses from your images</li>
+    <li>Redistribute, sell, or license your images to anyone</li>
+    <li>Use your images to train machine-learning models</li>
+    <li>Crop out your watermark, timestamp or overlay</li>
+    <li>Fetch from behind a login, or work around a limit you set</li>
+  </ul></div>
+</div>
+<hr />
+<h2>How your camera appears</h2>
+<ul>
+  <li><strong>The image is yours, unchanged.</strong> The app shows the current frame your server publishes. It is scaled to fit the phone's screen and nothing else: no cropping, no filters, no removal of the overlays, timestamps or watermarks you put on it.</li>
+  <li><strong>Credit on every view.</strong> Your organization's name sits on the image as a badge and in the full-screen viewer's footer, with a tap-through to the page you choose. The app's Sources screen lists every provider. If you prefer particular wording ("Courtesy of…", a program name, a grant acknowledgment), we use yours.</li>
+  <li><strong>Context, not competition.</strong> Your camera appears as a pin on a map and in the app's lists next to the weather for that spot. We do not present it as our own camera, and the link back goes to your page, not to a copy of it.</li>
+</ul>
+<hr />
+<h2>How often we fetch</h2>
+<p>Images are fetched by the user's phone, directly from the URL your site publishes, only while the camera is on screen. Nothing is fetched for a camera nobody is looking at.</p>
+<ul>
+  <li><strong>Full-screen viewer and map popup:</strong> every 30 seconds while open.</li>
+  <li><strong>Thumbnails, lists and the Home screen:</strong> every 1 to 5 minutes while on screen.</li>
+  <li><strong>Your limit wins.</strong> If you ask for a slower cadence, we store it against your camera and the app enforces it on every surface at once, so a phone never requests your image more often than you asked, however many places show it. Once a minute, once every five, once every fifteen: any of these is fine.</li>
+  <li><strong>Health check:</strong> before each app release, a script fetches one frame from each camera to catch feeds that have gone dark or are serving a placeholder, so we stop showing them. A few times a month at most.</li>
+  <li><strong>Mirroring, rarely and only with permission:</strong> a very small number of cameras are copied by our server once every five minutes instead of being fetched by phones. We do this only when the owner's hosting meters their downloads, or when the published image is too large for a phone to decode, and only with that provider's written agreement. Each copy overwrites the last; no history is kept.</li>
+</ul>
+<hr />
+<h2>What we never do</h2>
+<ul>
+  <li>No recording, archive, history or time-lapse. The app holds the current frame in the phone's ordinary image cache and nothing more.</li>
+  <li>No redistribution. Images are not served to third parties, embedded elsewhere, exported, shared to social media by the app, or offered through any API.</li>
+  <li>No sale or licensing of your images, and no use of them in advertising. The app carries no advertising at all.</li>
+  <li>No machine-learning training, computer-vision analysis or dataset building on your images.</li>
+  <li>No fetching from behind logins or paywalls, no automated discovery that evades a published limit, and no circumvention of a block you put in place.</li>
+  <li>No removal of credit. If a build ever shows your camera without your name on it, that is a bug and we fix it.</li>
+</ul>
+<hr />
+<h2>Your controls</h2>
+<dl>
+  <dt>Refresh limit</dt><dd>Tell us the slowest cadence you are comfortable with and we apply it as described above.</dd>
+  <dt>Credit wording and link</dt><dd>Your name, your wording, your link. Changes take effect in the next app release.</dd>
+  <dt>Business screens</dt><dd>We offer a paid product that lets a business show its own pinned cameras and conditions on a TV in its lobby (see below). If your data policy is non-commercial, or you simply prefer it, your camera is excluded from that product. Research institutions are excluded by default.</dd>
+  <dt>Removal</dt><dd>One email to <a href="mailto:hello@upcanyon.app">hello@upcanyon.app</a>. We add the camera to a removal list that every phone reads when the app opens, so it stops showing within one business day, with no app update required. Our own server-side fetches (mirroring, health checks) stop at the same time.</dd>
+  <dt>URL changes and outages</dt><dd>If a camera moves or goes down for maintenance, tell us and we hide it until it is back. If you do not, our health check will notice within a few weeks and hide it anyway.</dd>
+  <dt>Questions about any view</dt><dd>Ask us what the app does with your camera at any time and we will show you, screenshots included.</dd>
+</dl>
+<hr />
+<h2>How UpCanyon makes money, plainly</h2>
+<ul>
+  <li><strong>The app is free</strong>, and every camera, forecast and reading in it is free. There is no camera that only paying users can see.</li>
+  <li><strong>UpCanyon Pro</strong> is a subscription that adds features: unlimited pinned spots and alerts, more saved places, themes. It does not add data. Nothing from your camera moves behind the paywall, and we do not describe Pro as access to anyone's cameras.</li>
+  <li><strong>Business screens</strong> are a separate paid product for businesses that want to show the cameras and conditions they care about on a TV in their lobby. A provider can keep their camera out of it (above), and cameras from institutions with non-commercial data policies are kept out by default.</li>
+  <li><strong>No advertising, no data sales.</strong> We do not sell user data or camera imagery, and the app contains no advertising or marketing-tracker SDKs. Our <a href="/privacy/">privacy policy</a> covers the user side.</li>
+</ul>
+<hr />
+<h2>Where cameras come from</h2>
+<p>Most cameras in the app are published by state departments of transportation, the National Park Service, the U.S. Forest Service, the FAA, NOAA and NWS, the USGS, state and county agencies, universities, and research networks with open data policies, used under their stated terms and credited. Cameras run by private owners, harbors, observatories and institutions with their own policies are added only after the owner has said yes in writing, and each camera carries a record of the permission it rests on. A camera whose permission is pending stays hidden from every user until the answer comes. We do not pull images from commercial camera networks that sell access to their feeds.</p>
+<hr />
+<h2>Accountability</h2>
+<p>This policy is maintained by Ryan Nelson, the developer and owner of UpCanyon LLC. We answer provider email at <a href="mailto:hello@upcanyon.app">hello@upcanyon.app</a> within two business days, and removal requests within one. When this page changes, the version and date at the top change with it, and providers whose cameras are affected are told by email. A copy of this page, as it stood when you agreed, is kept with your permission record.</p>
+<p class="updated">Version 1, published October 5, 2026.</p>
+      </div>
+    </main>
+
+    <footer class="site">
+      <div>© 2026 UpCanyon LLC · Fort Collins, Colorado · <a href="/cameras/">Camera policy</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="mailto:hello@upcanyon.app">hello@upcanyon.app</a></div>
+      <div class="legalnote">Weather data: NOAA/NWS, USGS, USDA NRCS, EPA AirNow, and partners. Not for life-safety use — always heed official warnings.</div>
+    </footer>
+  </div>
+</body>
+</html>
