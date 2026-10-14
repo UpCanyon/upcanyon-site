@@ -3,422 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>UpCanyon — Live Weather Cams, Radar & Outdoor Conditions App</title>
-  <meta name="description" content="UpCanyon is a weather and conditions app: 30,000+ live road and mountain cameras in all 50 states, real weather stations, radar nowcasts, snowpack, and river flows across the US. Free, no ads. Built in Fort Collins, Colorado." />
+  <title>UpCanyon · Live cameras, weather stations, radar, snow and rivers</title>
+  <meta name="description" content="UpCanyon is a weather app with a live camera on the home screen. 30,000+ public cameras in all 50 states, real weather stations, radar you can scrub, snowpack and river gauges. Free, no ads. Made in Fort Collins, Colorado." />
   <link rel="canonical" href="https://upcanyon.app/" />
-  <meta property="og:title" content="UpCanyon — Don't guess. Look." />
-  <meta property="og:description" content="Live cams, real weather stations, radar, snowpack, and rivers. One app, no ads, no data selling, no auto-renew." />
+  <meta property="og:title" content="UpCanyon · Weather you can look at." />
+  <meta property="og:description" content="A live camera on your home screen, backed by the nearest weather station, radar, snowpack and river gauges. Free, no ads, nothing renews on its own." />
   <meta property="og:image" content="https://upcanyon.app/assets/shots/cam-longs-peak-diamond.png" />
   <meta property="og:url" content="https://upcanyon.app/" />
   <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0A0A09" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-/* ============================================================
-   UpCanyon — full-bleed scene design.
-   Every section is a scene; a lava-lamp layer of huge color
-   blobs drifts continuously behind the whole page and re-tints
-   itself as each scene scrolls into view.
-   ============================================================ */
-:root {
-  --charcoal: #12161C;
-  --charcoal-deep: #0B0E13;
-  --snow: #F5F7FA;
-  --snow-dim: #C9D1DA;
-  --edge: rgba(255, 255, 255, 0.14);
-  --ember: #EA580C;
-  --ember-bright: #F97316;
-  --cyan: #22D3EE;
-  --violet: #7C3AED;
-}
-* { box-sizing: border-box; }
-html { background: var(--charcoal-deep); scroll-behavior: smooth; }
-body {
-  margin: 0;
-  font-family: 'Montserrat', -apple-system, 'Segoe UI', sans-serif;
-  color: var(--snow);
-  background: var(--charcoal-deep);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: clip;
-  /* Lava palette — retinted per scene below; blobs transition between them. */
-  --l1: #7C3AED; --l2: #EA580C; --l3: #22D3EE; --l4: #F97316;
-}
-a { color: var(--ember-bright); text-decoration: none; }
-a:hover { text-decoration: underline; }
-img { max-width: 100%; }
-
-/* ── LAVA LAMP ─────────────────────────────────────────────
-   Four solid-color discs, heavily blurred, screen-blended over
-   charcoal, drifting big distances on long desynced loops.
-   Their colors are CSS vars swapped per scene, so the whole sky
-   melts from one mood to the next as you scroll. */
-.lava { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
-.blob {
-  position: absolute; border-radius: 50%;
-  mix-blend-mode: screen;
-  filter: blur(clamp(60px, 8vw, 110px));
-  opacity: 0.55;
-  will-change: transform;
-  transition: background-color 1.6s ease;
-}
-.b1 { width: 72vmax; height: 72vmax; top: -28vmax; left: -20vmax; background: var(--l1); animation: drift1 26s ease-in-out infinite; }
-.b2 { width: 62vmax; height: 62vmax; bottom: -26vmax; right: -18vmax; background: var(--l2); animation: drift2 31s ease-in-out infinite; }
-.b3 { width: 48vmax; height: 48vmax; top: 30%; left: -14vmax; background: var(--l3); animation: drift3 22s ease-in-out infinite; opacity: 0.45; }
-.b4 { width: 40vmax; height: 40vmax; top: -12vmax; right: -6vmax; background: var(--l4); animation: drift4 18s ease-in-out infinite; opacity: 0.4; }
-@keyframes drift1 {
-  0%   { transform: translate3d(-6vw, -4vh, 0) scale(1, 1); }
-  33%  { transform: translate3d(24vw, 16vh, 0) scale(1.25, 0.9); }
-  66%  { transform: translate3d(8vw, 34vh, 0) scale(0.88, 1.18); }
-  100% { transform: translate3d(-6vw, -4vh, 0) scale(1, 1); }
-}
-@keyframes drift2 {
-  0%   { transform: translate3d(4vw, 6vh, 0) scale(1, 1); }
-  30%  { transform: translate3d(-22vw, -18vh, 0) scale(1.2, 1.05); }
-  65%  { transform: translate3d(-8vw, -34vh, 0) scale(0.85, 1.2); }
-  100% { transform: translate3d(4vw, 6vh, 0) scale(1, 1); }
-}
-@keyframes drift3 {
-  0%   { transform: translate3d(-4vw, 0, 0) scale(1, 1); }
-  40%  { transform: translate3d(30vw, -14vh, 0) scale(1.3, 0.85); }
-  70%  { transform: translate3d(44vw, 10vh, 0) scale(0.9, 1.1); }
-  100% { transform: translate3d(-4vw, 0, 0) scale(1, 1); }
-}
-@keyframes drift4 {
-  0%   { transform: translate3d(0, 2vh, 0) scale(1, 1); }
-  50%  { transform: translate3d(-30vw, 26vh, 0) scale(1.35, 1.1); }
-  100% { transform: translate3d(0, 2vh, 0) scale(1, 1); }
-}
-/* A soft vignette keeps edges dark so the type always reads. */
-.lava::after {
-  content: ""; position: absolute; inset: 0;
-  background: radial-gradient(ellipse 120% 90% at 50% 45%, transparent 55%, rgba(7, 10, 14, 0.65) 100%);
-}
-@media (prefers-reduced-motion: reduce) {
-  .blob { animation: none; transition: none; }
-}
-
-/* Scene palettes — body[data-scene] is set by JS as sections cross mid-viewport. */
-body[data-scene="hero"]     { --l1: #7C3AED; --l2: #EA580C; --l3: #22D3EE; --l4: #F97316; }
-body[data-scene="home"]     { --l1: #F97316; --l2: #EA580C; --l3: #7C3AED; --l4: #FB923C; }
-body[data-scene="trio"]     { --l1: #8B5CF6; --l2: #7C3AED; --l3: #22D3EE; --l4: #A855F7; }
-body[data-scene="radar"]    { --l1: #0EA5E9; --l2: #22D3EE; --l3: #7C3AED; --l4: #0891B2; }
-body[data-scene="layers"]   { --l1: #22D3EE; --l2: #0EA5E9; --l3: #2DD4BF; --l4: #7C3AED; }
-body[data-scene="local"]    { --l1: #8B5CF6; --l2: #EA580C; --l3: #6D28D9; --l4: #F97316; }
-body[data-scene="lists"]    { --l1: #EA580C; --l2: #F97316; --l3: #7C3AED; --l4: #C2410C; }
-body[data-scene="business"] { --l1: #22D3EE; --l2: #0EA5E9; --l3: #8B5CF6; --l4: #06B6D4; }
-body[data-scene="plans"]    { --l1: #EA580C; --l2: #7C3AED; --l3: #F97316; --l4: #22D3EE; }
-body[data-scene="locker"]   { --l1: #A855F7; --l2: #7C3AED; --l3: #EA580C; --l4: #8B5CF6; }
-body[data-scene="anywhere"] { --l1: #F97316; --l2: #22D3EE; --l3: #EA580C; --l4: #0EA5E9; }
-body[data-scene="outro"]    { --l1: #3B1D0E; --l2: #1E1B4B; --l3: #083344; --l4: #27272A; }
-
-/* ── HEADER ── */
-header.site {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 60;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 14px clamp(18px, 4vw, 48px);
-  transition: background 0.35s ease, border-color 0.35s ease;
-  border-bottom: 1px solid transparent;
-}
-header.site.scrolled {
-  background: rgba(12, 16, 22, 0.72);
-  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
-  border-bottom-color: rgba(255, 255, 255, 0.08);
-}
-.brand {
-  display: flex; align-items: center; gap: 11px;
-  font-weight: 800; font-size: 19px; letter-spacing: 0.01em; color: #fff;
-}
-.brand:hover { text-decoration: none; }
-.brand img { width: 46px; height: 46px; object-fit: contain; }
-nav.site { display: flex; gap: clamp(14px, 3vw, 30px); }
-nav.site a { color: var(--snow-dim); font-weight: 700; font-size: 14.5px; letter-spacing: 0.02em; }
-nav.site a:hover { color: #fff; text-decoration: none; }
-
-/* ── SCENES — every section is full-bleed, padded, stacked over the lava. ── */
-main { position: relative; z-index: 1; }
-.scene {
-  position: relative;
-  padding: clamp(72px, 11vh, 140px) clamp(20px, 6vw, 96px);
-  overflow: visible;
-}
-/* Giant ghost numeral — outline only, sits behind each scene's headline. */
-.num {
-  position: absolute; top: clamp(8px, 3vh, 40px); right: clamp(8px, 4vw, 60px);
-  font-weight: 800; font-size: clamp(110px, 20vw, 280px); line-height: 1;
-  color: transparent; -webkit-text-stroke: 2px rgba(255, 255, 255, 0.14);
-  pointer-events: none; user-select: none; z-index: 0;
-}
-.scene.numleft .num { right: auto; left: clamp(8px, 4vw, 60px); }
-.eyebrow {
-  font-weight: 800; font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase;
-  color: var(--ember-bright); margin-bottom: 14px;
-}
-.eyebrow.cyan { color: var(--cyan); }
-.eyebrow.violet { color: #C4B5FD; }
-.eyebrow::before {
-  content: ""; display: inline-block; width: 30px; height: 3px;
-  background: currentColor; vertical-align: middle; margin-right: 12px;
-}
-.scene h2 {
-  font-size: clamp(30px, 4.6vw, 56px);
-  font-weight: 800; letter-spacing: -0.025em; line-height: 1.06;
-  margin: 0 0 18px; max-width: 16em;
-}
-.scene p { font-size: clamp(15.5px, 1.35vw, 17.5px); color: var(--snow-dim); margin: 0 0 14px; max-width: 34em; }
-.scene p strong { color: var(--snow); }
-
-/* Two-column story layout: text one side, imagery the other. */
-.story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 6vw, 90px); align-items: center; position: relative; z-index: 1; }
-.story .txt { min-width: 0; }
-.story .media { min-width: 0; display: flex; justify-content: center; }
-.scene.rev .story .media { order: -1; }
-
-/* Phone screenshots — frameless rounded shots, tilted, floating on a
-   rotated color field, straightening on hover. */
-.media { position: relative; }
-.media .field {
-  position: absolute; inset: 10% -4% -6% 12%;
-  background: var(--fieldc, rgba(234, 88, 12, 0.22));
-  border-radius: 40px; transform: rotate(-5deg); z-index: 0;
-}
-.phone {
-  position: relative; z-index: 1;
-  border-radius: 26px; overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
-  background: #10141a;
-  width: min(100%, 400px);
-  transform: rotate(2.5deg);
-  transition: transform 0.55s cubic-bezier(.2,.7,.2,1), box-shadow 0.55s ease;
-}
-.phone:hover { transform: rotate(0deg) translateY(-10px) scale(1.02); box-shadow: 0 44px 110px rgba(0, 0, 0, 0.65); }
-.phone img { display: block; width: 100%; height: auto; }
-.scene.rev .phone { transform: rotate(-2.5deg); }
-.scene.rev .phone:hover { transform: rotate(0deg) translateY(-10px) scale(1.02); }
-
-/* Trio rows — three phones staggered like cards tossed on a table. */
-.trio-row { display: flex; justify-content: center; gap: clamp(14px, 3vw, 40px); flex-wrap: wrap; position: relative; z-index: 1; padding-top: 12px; }
-.trio-row .phone { width: min(100%, 300px); flex: 0 1 300px; }
-.trio-row .phone:nth-child(1) { transform: rotate(-3deg) translateY(0); }
-.trio-row .phone:nth-child(2) { transform: rotate(1.5deg) translateY(34px); }
-.trio-row .phone:nth-child(3) { transform: rotate(3.5deg) translateY(10px); }
-.trio-row .phone:hover { transform: rotate(0deg) translateY(-6px) scale(1.03); }
-/* p.rowcap must OUTRANK the generic .scene p rule (max-width 34em,
-   no auto margins) or captions center inside a narrow left-pinned box. */
-.scene p.rowcap, .rowcap {
-  text-align: center; color: var(--snow-dim); font-size: clamp(15px, 1.3vw, 16.5px);
-  font-weight: 600; max-width: 46em; margin: 56px auto 0; position: relative; z-index: 1;
-}
-.rowcap b { color: var(--snow); }
-
-.betaform { display: flex; gap: 10px; flex-wrap: wrap; align-items: stretch; }
-.betaform input[type="email"] {
-  flex: 1 1 220px; min-width: 200px; padding: 13px 16px; border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06);
-  color: var(--snow); font-family: inherit; font-size: 15px; font-weight: 600;
-}
-.betaform input[type="email"]::placeholder { color: var(--snow-faint); }
-.betaform input[type="email"]:focus { outline: 2px solid var(--ember-bright); border-color: transparent; }
-.betathanks { color: var(--snow); font-weight: 800; font-size: 17px; }
-
-/* Reserve every screenshot's box BEFORE its lazy image loads — kills the
-   layout shift that made anchor jumps land on the wrong section for
-   cold-cache visitors (all phone shots are 603x1311; Diamond is its
-   landscape twin; the Cast View render is ~16:9). */
-.phone img { aspect-ratio: 603 / 1311; object-fit: cover; }
-.diamond img, .print img { aspect-ratio: 1311 / 603; object-fit: cover; }
-.tv img, .tvscreen img { aspect-ratio: 1914 / 1072; object-fit: cover; }
-
-/* The Diamond — landscape framed print; lives beside the hero copy. */
-.herogrid { display: flex; align-items: center; gap: clamp(28px, 4vw, 64px); flex-wrap: wrap; }
-.herocopy { flex: 1 1 480px; min-width: 300px; }
-.diamond.herocam { flex: 1 1 460px; min-width: 300px; margin: 0; }
-@media (max-width: 900px) { .diamond.herocam { margin-top: 34px; } }
-.diamond {
-  margin: clamp(56px, 8vh, 96px) auto 0; max-width: 780px; position: relative; z-index: 1;
-  border-radius: 22px; overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.6);
-}
-.diamond img { display: block; width: 100%; height: auto; transition: transform 0.55s cubic-bezier(.2,.7,.2,1); }
-.diamond:hover img { transform: scale(1.02); }
-.diamond figcaption {
-  padding: 14px 18px; font-size: 15px; font-weight: 600; color: var(--snow-dim);
-  background: rgba(10, 13, 18, 0.72); border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-.diamond figcaption b { color: var(--cyan); }
-
-/* Lists — two phones overlapping as a pair. */
-.pair { position: relative; display: flex; justify-content: center; }
-.pair .phone { width: min(78%, 320px); }
-.pair .phone:first-child { transform: rotate(-4deg) translateX(-12%); z-index: 1; }
-.pair .phone:last-child { transform: rotate(3deg) translateX(12%) translateY(46px); z-index: 2; margin-left: -34%; }
-.pair .phone:hover { z-index: 3; }
-.pair .phone:first-child:hover { transform: rotate(0deg) translateX(-12%) translateY(-8px); }
-.pair .phone:last-child:hover { transform: rotate(0deg) translateX(12%) translateY(38px); }
-
-/* Cast — a phone next to a TV built out of CSS. */
-.castgrid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 70px); align-items: center; position: relative; z-index: 1; }
-.tv { position: relative; z-index: 1; }
-.tv .screen {
-  border-radius: 14px; overflow: hidden;
-  border: 10px solid #05070B; background: #05070B;
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.12);
-}
-.tv .screen img { display: block; width: 100%; height: auto; }
-.tv .neck { width: 9%; height: 26px; margin: 0 auto; background: linear-gradient(180deg, #0A0E14, #05070B); }
-.tv .base { width: 34%; height: 10px; margin: 0 auto; border-radius: 999px; background: #0A0E14; box-shadow: 0 6px 24px rgba(0,0,0,0.5); }
-
-/* Anywhere — the four-shot sequence, arrows between, order always numbered. */
-.seq { display: flex; justify-content: center; align-items: flex-start; gap: clamp(10px, 2vw, 26px); flex-wrap: wrap; position: relative; z-index: 1; padding-top: 18px; }
-.step { flex: 0 1 235px; min-width: 180px; position: relative; }
-.step .phone { width: 100%; transform: none; }
-.step .phone:hover { transform: translateY(-8px) scale(1.02); }
-.step .chip {
-  display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px;
-  font-weight: 800; font-size: 13.5px; letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--snow);
-}
-.step .chip i {
-  font-style: normal; display: inline-grid; place-items: center;
-  width: 26px; height: 26px; border-radius: 999px;
-  background: var(--ember); color: #fff; font-size: 13px;
-}
-.step:not(:last-child)::after {
-  content: "→"; position: absolute; top: 46%; right: -22px;
-  font-weight: 800; font-size: 26px; color: var(--ember-bright);
-}
-@media (max-width: 1050px) {
-  .step:not(:last-child)::after { display: none; }
-}
-
-/* ── FREE AND PRO — two cards, Pro raised. ── */
-.plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: clamp(16px, 2.5vw, 28px); max-width: 880px; margin: 34px 0 0; position: relative; z-index: 1; }
-.plan {
-  border: 1px solid var(--edge); border-radius: 20px;
-  background: rgba(14, 18, 24, 0.6);
-  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-  padding: clamp(22px, 3vw, 32px);
-}
-.plan.pro { border-color: rgba(249, 115, 22, 0.7); background: rgba(40, 20, 8, 0.62); box-shadow: 0 24px 70px rgba(234, 88, 12, 0.18); }
-.plan-name { font-weight: 800; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--snow-dim); }
-.plan.pro .plan-name { color: var(--ember-bright); }
-.plan-price { font-weight: 800; font-size: clamp(34px, 4vw, 46px); letter-spacing: -0.03em; line-height: 1.1; margin-top: 8px; }
-.plan-price small { font-size: 15px; font-weight: 700; letter-spacing: 0; color: var(--snow-dim); }
-.plan-alt { color: var(--snow-dim); font-weight: 600; font-size: 14px; margin-top: 4px; }
-.plan ul { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 10px; }
-.plan li { position: relative; padding-left: 26px; color: var(--snow-dim); font-size: 15.5px; line-height: 1.45; }
-.plan li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--ember-bright); font-weight: 800; }
-.plan li b { color: var(--snow); }
-.scene p.rowcap.left, .rowcap.left { text-align: left; margin-left: 0; }
-
-/* ── HERO ── */
-.hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; }
-.hero h1 {
-  font-size: clamp(44px, 7.2vw, 92px);
-  font-weight: 800; letter-spacing: -0.035em; line-height: 0.98;
-  text-transform: uppercase; margin: 0 0 24px; max-width: 9em;
-}
-.hero h1 em { font-style: normal; color: var(--ember-bright); }
-.hero p.sub { font-size: clamp(17px, 1.6vw, 20px); color: var(--snow-dim); max-width: 36em; margin: 0 0 28px; font-weight: 600; }
-.pledge { display: flex; flex-wrap: wrap; gap: 10px 14px; margin: 0 0 34px; }
-.pledge div {
-  font-weight: 700; font-size: 15px; letter-spacing: 0.02em; color: var(--snow);
-  display: flex; align-items: center; gap: 9px;
-  padding: 10px 16px; border-radius: 999px;
-  border: 1px solid var(--edge); background: rgba(12, 16, 22, 0.45);
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-}
-.pledge div::before { content: "✕"; color: var(--ember-bright); font-weight: 800; font-size: 13px; }
-.cta {
-  display: inline-block; background: var(--ember); color: #fff;
-  font-weight: 800; font-size: 15.5px; letter-spacing: 0.04em;
-  padding: 16px 30px; border-radius: 12px; border: none;
-  transition: transform 0.3s cubic-bezier(.2,.7,.2,1), background 0.3s ease;
-}
-.cta:hover { background: var(--ember-bright); text-decoration: none; transform: translateY(-3px); }
-.cta.ghost { background: rgba(12, 16, 22, 0.45); border: 1px solid var(--edge); color: var(--snow); margin-left: 12px; }
-.cta.ghost:hover { border-color: rgba(255,255,255,0.4); background: rgba(12, 16, 22, 0.6); }
-.scrollcue { margin-top: 56px; color: var(--snow-dim); font-weight: 700; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
-.scrollcue::after { content: "↓"; font-size: 18px; color: var(--ember-bright); animation: bob 1.8s ease-in-out infinite; }
-@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
-@media (prefers-reduced-motion: reduce) { .scrollcue::after { animation: none; } }
-
-/* ── OUTRO: builder / trust / contact / footer ── */
-.outro { position: relative; z-index: 1; }
-.builder h2 { font-size: clamp(26px, 3.6vw, 44px); }
-.trustnote { margin-top: clamp(36px, 6vh, 64px); padding-top: clamp(28px, 4vh, 44px); border-top: 1px solid var(--edge); }
-.trustnote p { font-size: 15.5px; color: var(--snow-dim); max-width: 46em; }
-.contactcard {
-  margin-top: clamp(36px, 6vh, 64px);
-  border: 1px solid var(--edge); border-radius: 20px;
-  background: rgba(14, 18, 24, 0.6);
-  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-  padding: clamp(24px, 4vw, 44px);
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
-}
-.contactcard h2 { margin: 0 0 8px; font-size: clamp(22px, 2.6vw, 32px); }
-.contactcard p { margin: 0; }
-footer.site {
-  position: relative; z-index: 1;
-  border-top: 1px solid var(--edge);
-  padding: 28px clamp(20px, 6vw, 96px) 48px;
-  color: var(--snow-dim); font-size: 15px; font-weight: 600;
-}
-footer.site a { color: var(--snow-dim); }
-footer.site a:hover { color: #fff; }
-footer.site .legalnote { margin-top: 10px; font-size: 13px; font-weight: 400; color: #97A1AC; }
-
-/* ── Scroll reveals ── */
-.rv { opacity: 0; transform: translateY(36px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.2,.7,.2,1); }
-.rv.in { opacity: 1; transform: none; }
-.rv.d1 { transition-delay: 0.08s; } .rv.d2 { transition-delay: 0.18s; } .rv.d3 { transition-delay: 0.28s; } .rv.d4 { transition-delay: 0.38s; }
-/* Parallaxed elements get inline transforms every frame — fade them in on
-   opacity only so the reveal transition never fights the parallax. */
-.rv[data-plx] { transform: none; transition: opacity 0.8s ease; }
-@media (prefers-reduced-motion: reduce) {
-  .rv { opacity: 1; transform: none; transition: none; }
-  .phone, .diamond img, .cta { transition: none; }
-}
-
-/* ── Responsive ── */
-@media (max-width: 900px) {
-  .story, .castgrid { grid-template-columns: 1fr; }
-  .scene.rev .story .media { order: 0; }
-  .story .media { margin-top: 10px; }
-  .num { font-size: clamp(90px, 26vw, 160px); -webkit-text-stroke-width: 1.5px; }
-  .trio-row .phone:nth-child(n) { transform: rotate(0deg) translateY(0); }
-  .scene p.rowcap { margin: 30px auto 0; }
-  .pair { flex-wrap: wrap; gap: 18px; }
-  .pair .phone, .pair .phone:first-child, .pair .phone:last-child {
-    transform: none; margin: 0; width: min(100%, 320px);
-  }
-}
-@media (max-width: 700px) {
-  .cta.ghost { margin-left: 0; margin-top: 12px; }
-  nav.site a:nth-child(-n+2) { display: none; }
-  .hero { min-height: 86vh; }
-}
-
-/* Legal pages (privacy/ + terms/) keep their own inline styles; these
-   classes remain for any page that still points here. */
-.legalpage { padding: 110px clamp(20px, 6vw, 96px) 72px; position: relative; z-index: 1; }
-.legalpage .uc-legal { max-width: 760px; }
-.uc-legal h1 { font-size: 2em; line-height: 1.15; margin: 0 0 0.4em; letter-spacing: -0.02em; }
-.uc-legal h2 { font-size: 1.35em; margin: 1.8em 0 0.4em; letter-spacing: -0.01em; }
-.uc-legal h3 { font-size: 1.08em; margin: 1.4em 0 0.3em; }
-.uc-legal p, .uc-legal li { color: var(--snow-dim); }
-.uc-legal ul { margin: 0.7em 0; padding-left: 1.4em; }
-.uc-legal strong { color: var(--snow); }
-.uc-legal hr { border: none; border-top: 1px solid var(--edge); margin: 2em 0; }
-.uc-tablewrap { overflow-x: auto; margin: 1em 0; }
-.uc-legal table { border-collapse: collapse; width: 100%; font-size: 0.92em; }
-.uc-legal th, .uc-legal td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--edge); vertical-align: top; color: var(--snow-dim); }
-.uc-legal th { font-weight: 700; color: var(--snow); }
-</style>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/site.css" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -426,7 +24,7 @@ footer.site .legalnote { margin-top: 10px; font-size: 13px; font-weight: 400; co
     "name": "UpCanyon",
     "operatingSystem": "iOS, Android",
     "applicationCategory": "Weather",
-    "description": "Weather and outdoor conditions app with 30,000+ live cameras in all 50 states, real weather stations, radar nowcasts, snowpack, and river flows across the United States.",
+    "description": "Weather app with 30,000+ live public cameras in all 50 states, real weather stations, radar, snowpack and river gauges.",
     "url": "https://upcanyon.app/",
     "author": { "@type": "Organization", "name": "UpCanyon LLC", "url": "https://upcanyon.app/" },
     "sameAs": ["https://www.instagram.com/upcanyon.app/"],
@@ -434,431 +32,345 @@ footer.site .legalnote { margin-top: 10px; font-size: 13px; font-weight: 400; co
   }
   </script>
 </head>
-<body data-scene="hero">
-  <div class="lava" aria-hidden="true">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
-    <div class="blob b4"></div>
-  </div>
-
+<body>
+  <div class="ground" aria-hidden="true"><i class="g1"></i><i class="g2"></i><i class="g3"></i></div>
   <header class="site">
     <a class="brand" href="/"><img src="/assets/logo-white.png" alt="" />UpCanyon</a>
     <nav class="site">
-      <a href="/business/">For&nbsp;businesses</a>
-      <a href="/#plans">Free&nbsp;&amp;&nbsp;Pro</a>
-      <a href="/privacy/">Privacy</a>
+      <a href="/#home">The app</a>
+      <a href="/#plans">Pricing</a>
+      <a href="/business/">For businesses</a>
       <a href="/#contact">Contact</a>
     </nav>
   </header>
 
   <main>
     <!-- ═══ HERO ═══ -->
-    <section class="scene hero" data-scene="hero">
-      <div class="herogrid">
-      <div class="herocopy">
-      <p class="eyebrow rv">What's it like up there?</p>
-      <h1 class="rv">Don't guess. <em>Look.</em></h1>
-      <p class="sub rv d1">Live cameras, real weather stations, radar nowcasts,
-      snowpack, and rivers — for the drive up the canyon, the trailhead, and
-      the places forecasts usually lie about.</p>
-
-      <div class="pledge rv d2" aria-label="Our pledge">
-        <div>No ads</div>
-        <div>No selling your location</div>
-        <div>No auto-renew tricks</div>
-        <div>No notification spam</div>
+    <section class="hero wrap">
+      <div class="hero-copy rv">
+        <p class="label">iOS and Android · Fort Collins, Colorado</p>
+        <h1>Weather you can look at.</h1>
+        <p class="sub">UpCanyon puts a live camera on your home screen and backs it
+        with the nearest weather station, radar, snowpack and river gauges.
+        30,000+ public cameras in all 50 states. Free, with no ads.</p>
+        <div class="actions">
+          <span class="btn primary static">Coming soon to the App Store and Google Play</span>
+          <a class="btn ghost" href="/#contact">Get the beta</a>
+        </div>
       </div>
-
-      <div class="rv d3">
-        <span class="cta" style="cursor: default;">Coming soon to iOS &amp; Android</span>
-        <a class="cta ghost" href="/#contact">Join the beta</a>
-      </div>
-
-      <div class="scrollcue rv d4">The tour</div>
-      </div>
-
-      <figure class="diamond herocam rv d2" data-plx="0.03">
-        <img src="/assets/shots/cam-longs-peak-diamond.png" alt="Live camera view of the Diamond face of Longs Peak under storm light, seen full-screen in UpCanyon" fetchpriority="high" />
-        <figcaption><b>Live in the app right now:</b> the Diamond, Longs Peak.</figcaption>
+      <figure class="herocam rv d1">
+        <img src="/assets/shots/cam-longs-peak-diamond.png" alt="Live camera view of the Diamond on Longs Peak under storm light, full screen in UpCanyon" fetchpriority="high" />
+        <figcaption><span class="dot" aria-hidden="true"></span>Live in the app · the Diamond, Longs Peak</figcaption>
       </figure>
+    </section>
+
+    <!-- ═══ FACTS ═══ -->
+    <section class="facts">
+      <div class="wrap facts-grid rv">
+        <div><b>30,000+</b><span>public cameras</span></div>
+        <div><b>50</b><span>states covered</span></div>
+        <div><b>NOAA · USGS · SNOTEL · AirNow</b><span>where the numbers come from</span></div>
+        <div><b>0</b><span>ads, now or later</span></div>
       </div>
     </section>
 
-    <!-- ═══ 01 · HOME ═══ -->
-    <section class="scene" data-scene="home" style="--fieldc: rgba(249, 115, 22, 0.22);">
-      <div class="num" aria-hidden="true">01</div>
-      <div class="story">
-        <div class="txt rv">
-          <div class="eyebrow">01 · Home</div>
-          <h2>Your home screen is a live camera.</h2>
-          <p>Open the app and you&rsquo;re looking at the sky: a real camera near
-          you, not a stock photo. It picks one automatically; swap it for any
-          camera you like from the map. No camera nearby? You get a clean
-          weather animation instead.</p>
-          <p><strong>What&rsquo;s next, in plain words:</strong> the card under
-          the camera reads the nearest real station and tells you what is
-          about to change and when, like &ldquo;showers possible by 3&nbsp;PM,&rdquo;
-          not &ldquo;40% chance today.&rdquo;</p>
-          <p><strong>Name your places.</strong> Save home by typing your
-          address, call it whatever you like (Home, Cabin, the Farm), and tap
-          once to swap between there and wherever you&rsquo;re standing.</p>
+    <!-- ═══ HOME ═══ -->
+    <section class="sec" id="home">
+      <div class="wrap split">
+        <div class="copy rv">
+          <p class="label">Home</p>
+          <h2>Your home screen is a camera near you.</h2>
+          <p>Open the app and you see the sky from a real camera close to where
+          you are. The card under it reads the nearest weather station and
+          tells you what is coming and when: &ldquo;rain reaches you around
+          3:40,&rdquo; or &ldquo;dry for the next hour.&rdquo;</p>
+          <p>Type in your address, call it Home or Cabin or whatever you want,
+          and switch between there and where you are standing with one tap.</p>
         </div>
-        <div class="media rv d1" data-plx="0.05">
-          <div class="field" aria-hidden="true"></div>
-          <div class="phone"><img src="/assets/app/home.jpg" alt="UpCanyon home screen: a live Fort Collins camera behind the current temperature, with a card showing sunny, wind, humidity, sunset and today's forecast" loading="lazy" /></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ TRIO: AQI / UV / HISTORY ═══ -->
-    <section class="scene" data-scene="trio">
-      <div class="trio-row">
-        <div class="phone rv d1"><img src="/assets/app/air-quality.jpg" alt="Air quality page showing an index of 17, Good, on a color scale with a plain-language note" loading="lazy" /></div>
-        <div class="phone rv d2"><img src="/assets/app/uv.jpg" alt="UV index page showing the current UV, the day's curve, the peak hour and the sunscreen window" loading="lazy" /></div>
-        <div class="phone rv d3"><img src="/assets/app/history.jpg" alt="Weather history comparing this same date across seven years" loading="lazy" /></div>
-      </div>
-      <p class="rowcap rv d4"><b>Air quality and UV with its peak window</b>, one
-      tap from home. Pro adds <b>years of history</b> behind every reading.</p>
-    </section>
-
-    <!-- ═══ 02 · RADAR ═══ -->
-    <section class="scene rev" data-scene="radar" style="--fieldc: rgba(34, 211, 238, 0.18);">
-      <div class="num" aria-hidden="true">02</div>
-      <div class="story">
-        <div class="txt rv">
-          <div class="eyebrow cyan">02 · Radar</div>
-          <h2>Watch the storm, not the forecast.</h2>
-          <p>Open the map and put the radar in motion. Scrub it backward to
-          see where the storm has been, forward to see where it is headed.</p>
-          <p>Then layer live cameras on top of the radar and
-          <strong>look inside the storm</strong>: pick a camera under the
-          cell and see what is actually falling.</p>
-        </div>
-        <div class="media rv d1" data-plx="0.05">
-          <div class="field" aria-hidden="true"></div>
-          <div class="phone"><img src="/assets/app/radar.jpg" alt="Live radar showing a line of storms from Memphis to Louisville, with a past-to-future time scrubber" loading="lazy" /></div>
+        <div class="media rv d1">
+          <div class="phone"><img src="/assets/app/home.jpg" alt="UpCanyon home screen: a live Fort Collins camera behind the current temperature, with a card showing conditions, wind, humidity, sunset and today's forecast" loading="lazy" /></div>
         </div>
       </div>
     </section>
 
-    <!-- ═══ MAP LAYERS TRIO ═══ -->
-    <section class="scene" data-scene="layers">
-      <div class="trio-row">
-        <div class="phone rv d1"><img src="/assets/app/map-cams.jpg" alt="Map of the western United States with clustered camera counts" loading="lazy" /></div>
-        <div class="phone rv d2"><img src="/assets/app/map-snow.jpg" alt="Snow layer showing snow depth at SNOTEL sites across the Northern Colorado mountains" loading="lazy" /></div>
-        <div class="phone rv d3"><img src="/assets/app/map-water.jpg" alt="Water layer showing live river flows on gauges around the Poudre and Big Thompson" loading="lazy" /></div>
+    <!-- ═══ AIR · UV · HISTORY ═══ -->
+    <section class="sec tight">
+      <div class="wrap">
+        <div class="trio">
+          <figure class="cell rv d1">
+            <div class="phone"><img src="/assets/app/air-quality.jpg" alt="Air quality page showing an index of 17, Good, on a color scale with a plain-language note" loading="lazy" /></div>
+            <figcaption>Air quality</figcaption>
+          </figure>
+          <figure class="cell rv d2">
+            <div class="phone"><img src="/assets/app/uv.jpg" alt="UV index page showing the current UV, the day's curve, the peak hour and the sunscreen window" loading="lazy" /></div>
+            <figcaption>UV, with the peak hour</figcaption>
+          </figure>
+          <figure class="cell rv d3">
+            <div class="phone"><img src="/assets/app/history.jpg" alt="Weather history comparing this same date across seven years" loading="lazy" /></div>
+            <figcaption>This date, seven years back · Pro</figcaption>
+          </figure>
+        </div>
       </div>
-      <p class="rowcap rv d4">One map, every layer: <b>30,000+ cameras &middot; snowpack
-      &middot; river gauges</b> reporting real flow.</p>
     </section>
 
-    <!-- ═══ 03 · BACKYARD STATIONS ═══ -->
-    <section class="scene" data-scene="local" style="--fieldc: rgba(139, 92, 246, 0.2);">
-      <div class="num" aria-hidden="true">03</div>
-      <div class="story">
-        <div class="txt rv">
-          <div class="eyebrow violet">03 · Stations</div>
-          <h2>The weather on your street, not at the airport.</h2>
-          <p>The Stations layer sorts every reading by where it comes from:
-          <strong>Airports</strong>, <strong>Backcountry</strong>, and
-          <strong>Backyard</strong>. Backyard stations are real instruments at
-          people&rsquo;s homes, in the canyons and small towns where no
-          official station exists.</p>
-          <p>Tap any station for its live reading and its forecast. Pin the
-          one closest to you and check it in one tap.</p>
+    <!-- ═══ RADAR ═══ -->
+    <section class="sec">
+      <div class="wrap split rev">
+        <div class="copy rv">
+          <p class="label">Radar</p>
+          <h2>Radar you can scrub.</h2>
+          <p>Drag the slider back to see where the storm came from and forward
+          to see where it is going. The next hour comes from the radar too, so
+          the home card can say &ldquo;rain starts in 20 minutes&rdquo; instead
+          of &ldquo;60% chance today.&rdquo;</p>
+          <p>Turn cameras on over the radar and tap one under the storm to see
+          what is falling.</p>
         </div>
-        <div class="media rv d1" data-plx="0.05">
-          <div class="field" aria-hidden="true"></div>
+        <div class="media rv d1">
+          <div class="phone"><img src="/assets/app/radar.jpg" alt="Live radar over northwest Colorado and eastern Utah, with the None filter chip selected and a past-to-future time slider" loading="lazy" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ MAP LAYERS ═══ -->
+    <section class="sec tight">
+      <div class="wrap">
+        <div class="trio">
+          <figure class="cell rv d1">
+            <div class="phone"><img src="/assets/app/map-cams.jpg" alt="Map of the western United States with clustered camera counts" loading="lazy" /></div>
+            <figcaption>Cameras</figcaption>
+          </figure>
+          <figure class="cell rv d2">
+            <div class="phone"><img src="/assets/app/map-snow.jpg" alt="Snow layer showing snow depth at SNOTEL sites across the Northern Colorado mountains" loading="lazy" /></div>
+            <figcaption>Snow depth at SNOTEL sites</figcaption>
+          </figure>
+          <figure class="cell rv d3">
+            <div class="phone"><img src="/assets/app/map-water.jpg" alt="Water layer showing live river flows on gauges around the Poudre and Big Thompson" loading="lazy" /></div>
+            <figcaption>River flow at USGS gauges</figcaption>
+          </figure>
+        </div>
+        <p class="caption rv d4">One map. The same controls for every layer.</p>
+      </div>
+    </section>
+
+    <!-- ═══ STATIONS ═══ -->
+    <section class="sec">
+      <div class="wrap split">
+        <div class="copy rv">
+          <p class="label">Stations</p>
+          <h2>Readings from the station down the street.</h2>
+          <p>The map sorts stations by what they are: airports, backcountry
+          sites, and backyard stations that people run at home. In the canyons
+          and small towns the backyard station is usually the only one there,
+          and it is the one that matches what you see out the window.</p>
+          <p>Tap a station for its reading and its forecast. Pin the closest one
+          and check it from the Pinned tab.</p>
+        </div>
+        <div class="media rv d1">
           <div class="phone"><img src="/assets/app/map-backyard.jpg" alt="Map of Fort Collins and Laporte covered in backyard weather station pins" loading="lazy" /></div>
         </div>
       </div>
     </section>
 
-    <!-- ═══ 04 · LISTS ═══ -->
-    <section class="scene rev" data-scene="lists" style="--fieldc: rgba(234, 88, 12, 0.22);">
-      <div class="num" aria-hidden="true">04</div>
-      <div class="story">
-        <div class="txt rv">
-          <div class="eyebrow">04 · Lists</div>
-          <h2>Save the places you care about.</h2>
-          <p>Build lists (the pass you drive, your climbing spots, the town
-          where your parents live) and check on all of them in one glance:
-          live cams, current conditions, and an alert when something
-          changes.</p>
-          <p><strong>They follow you.</strong> Sign in with Apple or Google
-          and your pins, lists and places land on any phone you pick up.
-          Signing in is optional, and the app works the same without it.</p>
+    <!-- ═══ LISTS ═══ -->
+    <section class="sec">
+      <div class="wrap split rev">
+        <div class="copy rv">
+          <p class="label">Lists</p>
+          <h2>The pass, the trailhead and your parents&rsquo; town, in one list.</h2>
+          <p>Each list shows a live camera, the current reading and an alert
+          when something changes. Make one for the drive to the cabin and
+          another for the places you climb.</p>
+          <p>Sign in with Apple or Google and your lists come with you to a new
+          phone. Signing in is optional. The app works the same without it.</p>
         </div>
-        <div class="media rv d1" data-plx="0.04">
-          <div class="field" aria-hidden="true"></div>
-          <div class="pair">
-            <div class="phone"><img src="/assets/app/pinned.jpg" alt="Pinned screen with three lists, each showing a live camera thumbnail and one line of current conditions" loading="lazy" /></div>
-            <div class="phone"><img src="/assets/app/list.jpg" alt="A list called Poudre Canyon with sky, wind and temperature tiles above a live Cameron Pass camera" loading="lazy" /></div>
+        <div class="media pair rv d1">
+          <div class="phone"><img src="/assets/app/pinned.jpg" alt="Pinned screen with three lists, each showing a live camera thumbnail and one line of current conditions" loading="lazy" /></div>
+          <div class="phone"><img src="/assets/app/list.jpg" alt="A list called Poudre Canyon with sky, wind and temperature tiles above a live Cameron Pass camera" loading="lazy" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ THEMES ═══ -->
+    <section class="sec tight">
+      <div class="wrap">
+        <div class="copy wide rv">
+          <p class="label">Themes</p>
+          <h2>Eight themes. Day and night.</h2>
+          <p>Pick one and the whole app changes with it. Most have a day and a
+          night version, and Auto follows the sun where you are. Camera images
+          and warning colors stay the same in every theme. Themes are part of
+          Pro.</p>
+        </div>
+        <div class="trio">
+          <figure class="cell rv d1">
+            <div class="phone"><img src="/assets/app/themes-day.jpg" alt="The Customize screen in the day theme, listing eight themes with their color swatches" loading="lazy" /></div>
+            <figcaption>Founder&rsquo;s Edition, day</figcaption>
+          </figure>
+          <figure class="cell rv d2">
+            <div class="phone"><img src="/assets/app/home-night.jpg" alt="The home screen in the night theme" loading="lazy" /></div>
+            <figcaption>Night</figcaption>
+          </figure>
+          <figure class="cell rv d3">
+            <div class="phone"><img src="/assets/app/theme-twilight.jpg" alt="A preview of the Twilight theme: deep purple with amber accents" loading="lazy" /></div>
+            <figcaption>Twilight</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ANYWHERE ═══ -->
+    <section class="sec">
+      <div class="wrap">
+        <div class="copy wide rv">
+          <p class="label">Anywhere</p>
+          <h2>Works in any town in the US.</h2>
+          <p>Search a place and you get the same screens. Here is Asheville,
+          North Carolina: 44 cameras within ten miles, a weather station under
+          a mile away, the forecast, and the French Broad River gauge with its
+          history.</p>
+        </div>
+        <ol class="steps">
+          <li class="rv d1">
+            <span class="step">01 · Search</span>
+            <div class="phone"><img src="/assets/app/anywhere-search.jpg" alt="Search results for Asheville: the town, 44 cameras within 10 miles, and nearby stations" loading="lazy" /></div>
+          </li>
+          <li class="rv d2">
+            <span class="step">02 · Conditions</span>
+            <div class="phone"><img src="/assets/app/anywhere-now.jpg" alt="Current conditions for Asheville from a National Weather Service station less than a mile away" loading="lazy" /></div>
+          </li>
+          <li class="rv d3">
+            <span class="step">03 · Forecast</span>
+            <div class="phone"><img src="/assets/app/anywhere-forecast.jpg" alt="Hourly and seven-day forecast for Asheville" loading="lazy" /></div>
+          </li>
+          <li class="rv d4">
+            <span class="step">04 · River gauge</span>
+            <div class="phone"><img src="/assets/app/anywhere-water.jpg" alt="The French Broad River gauge at Asheville with its flow chart and a comparison to last year" loading="lazy" /></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ═══ PRICING ═══ -->
+    <section class="sec" id="plans">
+      <div class="wrap">
+        <div class="copy wide rv">
+          <p class="label">Pricing</p>
+          <h2>Free covers the whole app for three places.</h2>
+          <p>Every camera, every station, the radar and the forecast are free.
+          Free gives you three live pins and three alerts. Pro is for people
+          who keep track of more places than that.</p>
+        </div>
+        <div class="plans">
+          <div class="plan rv d1">
+            <p class="plan-name">Free</p>
+            <p class="plan-price">$0</p>
+            <ul>
+              <li>30,000+ live cameras in all 50 states</li>
+              <li>Weather stations, radar, snowpack and river gauges</li>
+              <li>Forecast, air quality and UV</li>
+              <li>3 live pins and 3 alerts</li>
+              <li>One saved place, plus wherever you are</li>
+              <li>Sign in to keep your pins on every phone</li>
+            </ul>
+          </div>
+          <div class="plan pro rv d2">
+            <p class="plan-name">Pro</p>
+            <p class="plan-price">$4.99<small> a month</small></p>
+            <p class="plan-alt">$44.99 a year, or $99.99 once for life</p>
+            <ul>
+              <li>Unlimited pins and lists</li>
+              <li>Unlimited alerts, aimed at the exact station or gauge</li>
+              <li>Years of history on every station, gauge and snow site</li>
+              <li>Compare any station with where you are</li>
+              <li>More saved places</li>
+              <li>All eight themes</li>
+            </ul>
           </div>
         </div>
+        <p class="caption left rv d3">Your first 7 days are Pro. No card, and nothing
+        renews on its own. When the week ends you are on Free, and your extra
+        pins stay saved.</p>
       </div>
     </section>
 
-    <!-- ═══ 05 · THEMES ═══ -->
-    <section class="scene" data-scene="locker">
-      <div class="num" aria-hidden="true">05</div>
-      <div class="txt rv" style="position: relative; z-index: 1;">
-        <div class="eyebrow violet">05 · Themes</div>
-        <h2>Day, night, and eight ways to wear it.</h2>
-        <p>Pick a theme and the whole app changes color with it. Most come in
-        day and night, and Auto switches with the sun where you are. Camera
-        images and warning colors never change. Themes come with Pro.</p>
-      </div>
-      <div class="trio-row" style="margin-top: 34px;">
-        <div class="phone rv d1"><img src="/assets/app/themes-day.jpg" alt="The Customize screen in the day theme, listing eight themes with their color swatches" loading="lazy" /></div>
-        <div class="phone rv d2"><img src="/assets/app/home-night.jpg" alt="The home screen in the night theme" loading="lazy" /></div>
-        <div class="phone rv d3"><img src="/assets/app/theme-twilight.jpg" alt="A preview of the Twilight theme: deep purple with amber accents" loading="lazy" /></div>
-      </div>
-      <p class="rowcap rv d4">The same app in <b>Founder&rsquo;s Edition by day</b>, by
-      night, and in <b>Twilight</b>.</p>
-    </section>
-
-    <!-- ═══ 06 · WORKS ANYWHERE ═══ -->
-    <section class="scene" data-scene="anywhere">
-      <div class="num" aria-hidden="true">06</div>
-      <div class="txt rv" style="position: relative; z-index: 1;">
-        <div class="eyebrow">06 · Anywhere</div>
-        <h2>And it works anywhere in the country.</h2>
-        <p>Search any US town and get the same treatment. Here is
-        <strong>Asheville, North Carolina</strong>: 44 cameras within ten
-        miles, conditions from a station under a mile away, the forecast, and
-        the French Broad River gauge with its history.</p>
-      </div>
-      <div class="seq">
-        <div class="step rv d1">
-          <div class="chip"><i>1</i>Search</div>
-          <div class="phone"><img src="/assets/app/anywhere-search.jpg" alt="Search results for Asheville: the town, 44 cameras within 10 miles, and nearby stations" loading="lazy" /></div>
+    <!-- ═══ BUSINESS ═══ -->
+    <section class="sec">
+      <div class="wrap split">
+        <div class="copy rv">
+          <p class="label">For businesses</p>
+          <h2>Your conditions, on your TV.</h2>
+          <p>Run a taproom, a gear shop or a lodge? Put the cameras, snowpack,
+          river flows and forecast your customers ask about on the wall, with
+          your name on it.</p>
+          <p>We mail a streaming stick that is already set up for your spots.
+          Plug it in and the screen is on whenever the TV is. The first ten
+          locations are being set up now.</p>
+          <p class="actions"><a class="btn ghost" href="/business/">How it works</a></p>
         </div>
-        <div class="step rv d2">
-          <div class="chip"><i>2</i>Conditions</div>
-          <div class="phone"><img src="/assets/app/anywhere-now.jpg" alt="Current conditions for Asheville from a National Weather Service station less than a mile away" loading="lazy" /></div>
-        </div>
-        <div class="step rv d3">
-          <div class="chip"><i>3</i>Forecast</div>
-          <div class="phone"><img src="/assets/app/anywhere-forecast.jpg" alt="Hourly and seven-day forecast for Asheville" loading="lazy" /></div>
-        </div>
-        <div class="step rv d4">
-          <div class="chip"><i>4</i>River gauge</div>
-          <div class="phone"><img src="/assets/app/anywhere-water.jpg" alt="The French Broad River gauge at Asheville with its flow chart and a comparison to last year" loading="lazy" /></div>
-        </div>
-      </div>
-      <p class="rowcap rv">Search &rarr; conditions &rarr; forecast &rarr; the river gauge.
-      <b>Every number sourced, everywhere in the US.</b></p>
-    </section>
-
-    <!-- ═══ 07 · FREE AND PRO ═══ -->
-    <section class="scene" data-scene="plans" id="plans" style="scroll-margin-top: 80px;">
-      <div class="num" aria-hidden="true">07</div>
-      <div class="txt rv" style="position: relative; z-index: 1;">
-        <div class="eyebrow">07 · Free and Pro</div>
-        <h2>Free is the whole app, for three places.</h2>
-        <p>Every camera, every station, the radar, the forecast: none of it is
-        behind a paywall. Free gives you three live pins and three alerts.
-        <strong>Pro is for when you care about more than three places.</strong></p>
-      </div>
-      <div class="plans rv d1">
-        <div class="plan">
-          <div class="plan-name">Free</div>
-          <div class="plan-price">$0</div>
-          <ul>
-            <li>30,000+ live cameras in all 50 states</li>
-            <li>Weather stations, radar, snowpack and river gauges</li>
-            <li>Forecast, air quality and UV</li>
-            <li>3 live pins and 3 alerts</li>
-            <li>One saved place, plus wherever you are</li>
-            <li>Sign in to keep your pins on every phone</li>
-          </ul>
-        </div>
-        <div class="plan pro">
-          <div class="plan-name">Pro</div>
-          <div class="plan-price">$4.99<small> a month</small></div>
-          <div class="plan-alt">or $44.99 a year &middot; or $99.99 once, for life</div>
-          <ul>
-            <li><b>Unlimited pins and lists</b></li>
-            <li><b>Unlimited alerts</b>, aimed at the exact station or gauge</li>
-            <li><b>Years of history</b> on every station, gauge and snow site</li>
-            <li><b>Compare</b> any station with where you are, side by side</li>
-            <li>More saved places: the cabin, the in-laws, the office</li>
-            <li>All eight themes</li>
-          </ul>
-        </div>
-      </div>
-      <p class="rowcap left rv d2"><b>Your first 7 days are Pro, free.</b> No card, and
-      nothing renews by itself. When the week ends you&rsquo;re on Free, and
-      your extra pins are kept, not deleted.</p>
-    </section>
-
-    <!-- ═══ FOR YOUR BUSINESS ═══ -->
-    <section class="scene numleft" data-scene="business" style="--fieldc: rgba(34, 211, 238, 0.16);">
-      <div class="castgrid">
-        <div class="txt rv">
-          <div class="eyebrow cyan">For your business</div>
-          <h2>Your conditions, on your TV, all day.</h2>
-          <p>Run a taproom, a gear shop, a lodge? Your customers ask
-          &ldquo;what&rsquo;s it like up there?&rdquo; every hour. Put the
-          answer on the wall: the cameras, snowpack, river flows and forecast
-          they care about, with your name on it.</p>
-          <p>We send a streaming stick set up for your spots. You plug it in,
-          and the screen is on whenever the TV is. We&rsquo;re setting up the
-          first ten locations now.</p>
-          <p style="margin-top: 22px;"><a class="cta" href="/business/">See how it works</a></p>
-        </div>
-        <div class="tv rv d2" data-plx="0.03">
-          <div class="screen"><img src="/assets/app/business-tv.jpg" alt="A TV dashboard branded for a shop: a live mountain camera, river flows, temperatures and the hourly forecast" loading="lazy" /></div>
-          <div class="neck" aria-hidden="true"></div>
-          <div class="base" aria-hidden="true"></div>
+        <div class="media rv d1">
+          <div class="tv"><img src="/assets/app/business-tv.jpg" alt="A TV dashboard branded for a shop: a live mountain camera, river flows, temperatures and the hourly forecast" loading="lazy" /></div>
         </div>
       </div>
     </section>
 
-    <!-- ═══ BUILDER + TRUST + CONTACT ═══ -->
-    <section class="scene outro" data-scene="outro">
-      <div class="builder rv">
-        <div class="eyebrow">Fort Collins, Colorado</div>
-        <h2>Built by one person who lives here.</h2>
-        <p>UpCanyon is built in Fort Collins, Colorado, by someone who drives
-        the Poudre, checks the snow, and got tired of forecasts that stop being
-        true at the mouth of the canyon.</p>
-        <p>The app is free to use: live stations, cams, radar, and alerts
-        included. Pro adds unlimited pins and alerts, multi-year history, and
-        more saved places, with a <strong>pay-once Lifetime option</strong> and
-        a free week that <strong>never turns into a charge</strong>. When the
-        week ends, it just ends.</p>
-      </div>
-
-      <div class="trustnote rv">
-        <p>UpCanyon reads from the sources that report the ground truth &mdash; NOAA
-        and the National Weather Service, USGS river gauges, USDA SNOTEL
-        snowpack, EPA AirNow, state DOT cameras, NIFC wildfire data &mdash; and shows
-        you where every number came from. Your location is used to fetch your
-        weather, and for nothing else. Signing in is optional; if you do, we
-        keep your email and a backup of your pins, and you can delete both
-        from inside the app.</p>
-      </div>
-
-      <div class="contactcard rv" id="contact" style="scroll-margin-top: 90px;">
-        <div>
-          <h2>Questions, ideas, a cam we&rsquo;re missing?</h2>
-          <p><a href="mailto:hello@upcanyon.app">hello@upcanyon.app</a> &mdash; it goes
-          straight to the person who builds the app.</p>
+    <!-- ═══ ABOUT ═══ -->
+    <section class="sec about">
+      <div class="wrap split top">
+        <div class="copy rv">
+          <p class="label">Fort Collins, Colorado</p>
+          <h2>Made here, by one person.</h2>
         </div>
-        <form class="betaform" action="https://formsubmit.co/981e2b72750e432b9a399d1cdf904120" method="POST">
-          <input type="hidden" name="_subject" value="UpCanyon beta signup" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" value="https://upcanyon.app/?beta=thanks#contact" />
-          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
-          <input type="email" name="email" required placeholder="you@email.com" aria-label="Your email" />
-          <button class="cta" type="submit">Join the beta</button>
-        </form>
+        <div class="copy rv d1">
+          <p>I&rsquo;m Ryan. I drive the Poudre, check the snow, and got tired
+          of a forecast for town that says nothing about the canyon, so I
+          built this.</p>
+          <p>The app reads NOAA and the National Weather Service, USGS river
+          gauges, USDA SNOTEL snowpack, EPA AirNow, state DOT cameras and NIFC
+          fire data, and shows you where every number came from.</p>
+          <p>Your location is used to fetch your weather and for nothing else.
+          If you sign in, we keep your email and a backup of your pins, and you
+          can delete both from inside the app.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CONTACT ═══ -->
+    <section class="sec" id="contact">
+      <div class="wrap">
+        <div class="contact rv">
+          <div>
+            <h2>Questions, ideas, a camera we&rsquo;re missing?</h2>
+            <p><a href="mailto:hello@upcanyon.app">hello@upcanyon.app</a> goes to the
+            person who builds the app.</p>
+          </div>
+          <form class="betaform" action="https://formsubmit.co/981e2b72750e432b9a399d1cdf904120" method="POST">
+            <input type="hidden" name="_subject" value="UpCanyon beta signup" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="https://upcanyon.app/?beta=thanks#contact" />
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+            <input type="email" name="email" required placeholder="you@email.com" aria-label="Your email" />
+            <button class="btn primary" type="submit">Get the beta</button>
+          </form>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site">
-    <div>© 2026 UpCanyon LLC · Fort Collins, Colorado · <a href="/business/">For businesses</a> · <a href="/cameras/">Camera policy</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="mailto:hello@upcanyon.app">hello@upcanyon.app</a></div>
-    <div class="legalnote">Weather data: NOAA/NWS, USGS, USDA NRCS, EPA AirNow, and partners. Not for life-safety use — always heed official warnings.</div>
+    <div class="wrap">
+      <div class="foot-links">
+        <span>&copy; 2026 UpCanyon LLC · Fort Collins, Colorado</span>
+        <a href="/business/">For businesses</a>
+        <a href="/cameras/">Camera policy</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="mailto:hello@upcanyon.app">hello@upcanyon.app</a>
+      </div>
+      <p class="legalnote">Weather data: NOAA/NWS, USGS, USDA NRCS, EPA AirNow and partners. Not for life-safety use. Always follow official warnings.</p>
+    </div>
   </footer>
 
-  <script>
-  (function () {
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Sticky nav glasses up once you scroll.
-    var hdr = document.querySelector('header.site');
-    var onScrollHdr = function () {
-      if (hdr) hdr.classList.toggle('scrolled', window.scrollY > 14);
-    };
-    window.addEventListener('scroll', onScrollHdr, { passive: true });
-    onScrollHdr();
-
-    var scenes = document.querySelectorAll('[data-scene]');
-    var reveals = document.querySelectorAll('.rv');
-
-    if (!('IntersectionObserver' in window)) {
-      reveals.forEach(function (el) { el.classList.add('in'); });
-      return;
-    }
-
-    // Scroll reveals — staggered via the .dN delay classes.
-    if (reduce) {
-      reveals.forEach(function (el) { el.classList.add('in'); });
-    } else {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-      reveals.forEach(function (el) { io.observe(el); });
-    }
-
-    // Scene director — whichever section owns the middle of the viewport
-    // sets the lava palette. The blobs cross-fade colors on their own.
-    var sceneIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          document.body.setAttribute('data-scene', e.target.getAttribute('data-scene'));
-        }
-      });
-    }, { rootMargin: '-42% 0px -42% 0px', threshold: 0 });
-    scenes.forEach(function (s) { if (s.tagName === 'SECTION') sceneIO.observe(s); });
-
-    // Cheap parallax on imagery — transform-only, rAF-throttled, desktop only.
-    var plxEls = Array.prototype.slice.call(document.querySelectorAll('[data-plx]'));
-    if (!reduce && plxEls.length && window.matchMedia('(min-width: 760px)').matches) {
-      var ticking = false;
-      var applyPlx = function () {
-        ticking = false;
-        var mid = window.innerHeight / 2;
-        plxEls.forEach(function (el) {
-          var r = el.getBoundingClientRect();
-          if (r.bottom < -200 || r.top > window.innerHeight + 200) return;
-          var offset = (r.top + r.height / 2 - mid) * parseFloat(el.getAttribute('data-plx'));
-          el.style.transform = 'translate3d(0,' + (-offset).toFixed(1) + 'px,0)';
-        });
-      };
-      window.addEventListener('scroll', function () {
-        if (!ticking) { ticking = true; window.requestAnimationFrame(applyPlx); }
-      }, { passive: true });
-      applyPlx();
-    }
-
-    // Anchor scrolls drift when lazy images above the target finish
-    // loading mid-scroll (user report: Contact landed on Cast View).
-    // Correct: smooth-scroll on click, then re-align once layout
-    // settles; same correction on page load for /#contact arrivals.
-    var alignContact = function (behavior) {
-      var el = document.getElementById('contact');
-      if (el) el.scrollIntoView({ behavior: behavior, block: 'start' });
-    };
-    document.querySelectorAll('a[href$="#contact"]').forEach(function (a) {
-      a.addEventListener('click', function (ev) {
-        ev.preventDefault();
-        alignContact('smooth');
-        setTimeout(function () { alignContact('smooth'); }, 900);
-      });
-    });
-    // Post-signup return (?beta=thanks): swap the form for a confirmation.
-    if (/[?&]beta=thanks/.test(location.search)) {
-      var bf = document.querySelector('.betaform');
-      if (bf) {
-        var ok = document.createElement('p');
-        ok.className = 'betathanks';
-        ok.textContent = "You're on the list — talk soon. ⛰";
-        bf.replaceWith(ok);
-      }
-    }
-    if (location.hash === '#contact') {
-      window.addEventListener('load', function () {
-        setTimeout(function () { alignContact('auto'); }, 60);
-      });
-    }
-  })();
-  </script>
+  <script src="/assets/site.js"></script>
 </body>
 </html>
