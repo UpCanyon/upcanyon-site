@@ -317,3 +317,10 @@ body.preview .hero { min-height: 0; }
   .cell .phone { width: min(100%, 280px); margin-inline: auto; }
   .cell figcaption { margin-top: 12px; text-align: center; }
 }
+
+/* ── iPhone Duo ───────────────────────────────────────────── */
+.duo-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 40px; }
+.duo { margin: 0; }
+.duo img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 22px; background: #000; }
+.duo figcaption { margin-top: 10px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+@media (max-width: 760px) { .duo-pair { grid-template-columns: 1fr; gap: 28px; } }
