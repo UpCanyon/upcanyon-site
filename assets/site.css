@@ -177,7 +177,7 @@ p.actions { margin-top: 24px; }
   border: 1px solid var(--line-strong); background: #000;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
 }
-.phone img { width: 100%; height: auto; aspect-ratio: 603 / 1305; object-fit: cover; }
+.phone img, .phone video { display: block; width: 100%; height: auto; aspect-ratio: 603 / 1305; object-fit: cover; }
 .pair { gap: 18px; align-items: flex-start; }
 .pair .phone { width: min(48%, 300px); }
 .pair .phone:last-child { margin-top: 48px; }

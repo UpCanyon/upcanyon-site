@@ -57,3 +57,12 @@
     }
   }
 })();
+
+// Loops in the Customize section stay on their poster frame when the
+// visitor asks for reduced motion.
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) return;
+  var vids = document.querySelectorAll('video[autoplay]');
+  for (var i = 0; i < vids.length; i++) { vids[i].removeAttribute('autoplay'); vids[i].pause(); }
+})();
