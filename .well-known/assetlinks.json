@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.upcanyon.mobile",
+      "sha256_cert_fingerprints": [
+        "2F:34:06:F2:92:D0:F8:62:4B:9D:95:E7:F3:B5:54:76:63:D9:FB:BB:34:32:2C:CF:0C:5E:6A:F5:D0:C3:91:5F"
+      ]
+    }
+  }
+]

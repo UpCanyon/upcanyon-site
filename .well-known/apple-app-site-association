@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["S7Z2Y6FKL6.app.upcanyon.mobile"],
+        "components": [
+          { "/": "/list", "comment": "A shared list" },
+          { "/": "/list/*", "comment": "A shared list" }
+        ]
+      }
+    ]
+  }
+}
