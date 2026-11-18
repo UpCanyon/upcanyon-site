@@ -46,8 +46,9 @@
     });
   }
 
-  // Back from the signup form (?beta=thanks): swap the form for a line.
-  if (/[?&]beta=thanks/.test(location.search)) {
+  // Back from the signup form (?signup=thanks, or the older ?beta=thanks):
+  // swap the form for a line.
+  if (/[?&](signup|beta)=thanks/.test(location.search)) {
     var bf = document.querySelector('.betaform');
     if (bf) {
       var ok = document.createElement('p');
