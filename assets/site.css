@@ -178,6 +178,8 @@ p.actions { margin-top: 24px; }
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
 }
 .phone img, .phone video { display: block; width: 100%; height: auto; aspect-ratio: 603 / 1305; object-fit: cover; }
+/* Screen recordings keep the phone's bottom bar; crop from the bottom, not both ends. */
+.phone video { object-position: top; }
 .pair { gap: 18px; align-items: flex-start; }
 .pair .phone { width: min(48%, 300px); }
 .pair .phone:last-child { margin-top: 48px; }
