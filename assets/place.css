@@ -1,0 +1,75 @@
+/* Place pages (/weather/...). Built by the app repo's scripts/gen-place-pages.js. */
+.place .eyebrow a { color: inherit; text-decoration: none; }
+.place .eyebrow a:hover { color: var(--ink); }
+.place .quiet, .place .src { color: var(--ink-3); font-size: 14px; }
+.place .src a { color: var(--ink-2); }
+
+.place .alerts { margin: 22px 0 0; display: grid; gap: 10px; }
+.place .alerts[hidden] { display: none; }
+.place .alert { background: var(--surface); border: 1px solid var(--line-strong); border-radius: 14px; padding: 14px 18px; }
+.place .alert strong { display: block; font-size: 16.5px; }
+.place .alert span { color: var(--ink-2); font-size: 15px; }
+
+.place .fc { display: grid; gap: 0; margin: 10px 0 12px; border-top: 1px solid var(--line); }
+.place .fc .p { display: grid; grid-template-columns: 9.5em 4em 1fr; gap: 6px 16px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.place .fc .p b { color: var(--ink); font-weight: 700; }
+.place .fc .p .t { color: var(--ink); font-weight: 800; font-size: 22px; font-variant-numeric: tabular-nums; }
+.place .fc .p .d { color: var(--ink-2); font-size: 15.5px; }
+.place .fc .p .w { display: block; color: var(--ink-3); font-size: 14px; margin-top: 2px; }
+.place .fc > p { margin: 14px 0; }
+
+.place table.snow td.v { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.place .tablewrap { overflow-x: auto; }
+
+.place ul.near { list-style: none; padding: 0; margin: 10px 0 12px; border-top: 1px solid var(--line); }
+.place ul.near li { margin: 0; padding: 11px 0; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 2px 12px; align-items: baseline; }
+.place ul.near strong { font-weight: 700; }
+.place ul.near .q { color: var(--ink-3); font-size: 14px; }
+.place ul.near .q a { color: var(--ink-2); }
+
+.place .getapp { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); padding: 22px 24px; margin: 2.4em 0; }
+.place .getapp p { margin: 0; }
+.place .getapp .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.place .getapp a.btn { text-decoration: none; }
+.place .getapp a.btn.primary { color: #0A0A09; }
+
+.place .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.place .chips a { background: var(--surface-2); border-radius: 999px; padding: 7px 14px; font-size: 14.5px; font-weight: 600; text-decoration: none; color: var(--ink); }
+.place .chips a:hover { background: #242422; }
+
+/* ── Colour from the weather ──
+   place.js sets data-wx on <html> from the first forecast period. Each kind
+   recolours the three background lights and sets one accent. Quiet on
+   purpose: the type keeps its contrast and the page is still mostly black. */
+html[data-wx] { --wx1: rgba(255,255,255,0.17); --wx2: rgba(255,255,255,0.13); --wx3: rgba(255,255,255,0.10); --wx: var(--ink); }
+html[data-wx="clear-day"]   { --wx1: rgba(255,178,82,0.30);  --wx2: rgba(70,150,255,0.26);  --wx3: rgba(255,214,140,0.16); --wx: #FFC56B; }
+html[data-wx="clear-night"] { --wx1: rgba(86,104,255,0.30);  --wx2: rgba(150,96,255,0.20);  --wx3: rgba(60,150,255,0.16);  --wx: #A9B8FF; }
+html[data-wx="cloudy"]      { --wx1: rgba(130,160,205,0.26); --wx2: rgba(100,125,175,0.22); --wx3: rgba(175,190,215,0.13); --wx: #B9CBE6; }
+html[data-wx="rain"]        { --wx1: rgba(30,150,205,0.30);  --wx2: rgba(30,100,190,0.26);  --wx3: rgba(50,200,185,0.16);  --wx: #62CDEB; }
+html[data-wx="snow"]        { --wx1: rgba(160,210,255,0.32); --wx2: rgba(110,160,255,0.24); --wx3: rgba(225,238,255,0.18); --wx: #C4E5FF; }
+html[data-wx="storm"]       { --wx1: rgba(150,86,255,0.30);  --wx2: rgba(50,86,205,0.26);   --wx3: rgba(255,196,84,0.13);  --wx: #C9AEFF; }
+html[data-wx="fog"]         { --wx1: rgba(200,200,188,0.24); --wx2: rgba(150,165,168,0.20); --wx3: rgba(220,220,210,0.12); --wx: #D8D8CE; }
+html[data-wx="smoke"]       { --wx1: rgba(225,140,56,0.28);  --wx2: rgba(150,105,78,0.22);  --wx3: rgba(255,190,110,0.12); --wx: #EBAA62; }
+html[data-wx] .ground .g1 { background: radial-gradient(circle, var(--wx1), transparent 70%); }
+html[data-wx] .ground .g2 { background: radial-gradient(circle, var(--wx2), transparent 70%); }
+html[data-wx] .ground .g3 { background: radial-gradient(circle, var(--wx3), transparent 70%); }
+html[data-wx] .ground i { animation-name: ground1, wxin; animation-duration: 38s, 0.9s; animation-iteration-count: infinite, 1; animation-timing-function: ease-in-out, ease; }
+html[data-wx] .ground .g2 { animation-name: ground2, wxin; animation-duration: 46s, 0.9s; }
+html[data-wx] .ground .g3 { animation-name: ground3, wxin; animation-duration: 30s, 0.9s; }
+@keyframes wxin { from { opacity: 0.3; } to { opacity: 1; } }
+
+.place .now { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: 4px 0 18px; padding: 8px 16px 8px 12px; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); font-size: 15px; font-weight: 600; }
+.place .now i { width: 10px; height: 10px; border-radius: 50%; background: var(--wx, var(--ink-3)); flex: none; }
+.place .now b { color: var(--ink); font-weight: 700; }
+.place .now span { color: var(--wx, var(--ink)); font-weight: 800; font-variant-numeric: tabular-nums; }
+html[data-wx] .place .fc .p:first-child .t { color: var(--wx); }
+html[data-wx] .place .eyebrow { color: var(--wx); }
+html[data-wx] .place .getapp { border-color: color-mix(in srgb, var(--wx) 35%, transparent); }
+@media (prefers-reduced-motion: reduce) { html[data-wx] .ground i { animation: none; } }
+
+@media (max-width: 560px) {
+  .place .now { border-radius: 16px; padding: 10px 14px; }
+  .place .fc .p { grid-template-columns: 1fr auto; }
+  .place .fc .p .d { grid-column: 1 / -1; }
+  .place table.snow th:nth-child(2), .place table.snow td:nth-child(2) { display: none; }
+}

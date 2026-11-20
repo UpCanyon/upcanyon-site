@@ -9,6 +9,38 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  // Phone header: the links are one row that slides sideways. An arrow button
+  // at the right edge says so and steps the row along; it goes away once the
+  // last link is in view. On first load the row gives one small nudge.
+  var nav = hdr && hdr.querySelector('nav.site');
+  if (nav) {
+    var more = document.createElement('button');
+    more.type = 'button';
+    more.className = 'navmore';
+    more.setAttribute('aria-label', 'More links');
+    more.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    hdr.appendChild(more);
+    var edge = function () {
+      var room = nav.scrollWidth - nav.clientWidth;
+      hdr.classList.toggle('nav-slides', room > 4);
+      hdr.classList.toggle('nav-end', room <= 4 || nav.scrollLeft >= room - 4);
+    };
+    more.addEventListener('click', function () {
+      nav.scrollBy({ left: Math.max(120, nav.clientWidth * 0.7), behavior: reduce ? 'auto' : 'smooth' });
+    });
+    nav.addEventListener('scroll', edge, { passive: true });
+    window.addEventListener('resize', edge);
+    window.addEventListener('load', edge);
+    edge();
+    if (!reduce) {
+      setTimeout(function () {
+        if (nav.scrollWidth - nav.clientWidth <= 4 || nav.scrollLeft > 0) return;
+        nav.scrollTo({ left: 44, behavior: 'smooth' });
+        setTimeout(function () { nav.scrollTo({ left: 0, behavior: 'smooth' }); }, 650);
+      }, 900);
+    }
+  }
+
   // Reveals: a short rise as each block enters. Everything is shown at once
   // when motion is reduced, when the browser lacks the observer, or when a
   // preview tool asks for it (?preview).

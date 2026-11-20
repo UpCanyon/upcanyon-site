@@ -98,6 +98,15 @@ nav.site a {
   letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2);
 }
 nav.site a:hover { color: var(--ink); text-decoration: none; }
+/* The "more links" arrow. Only shown on phones while the row still has links
+   off the right edge (site.js sets the classes). */
+.navmore {
+  display: none; flex: none; place-items: center;
+  width: 34px; height: 34px; margin-right: -8px; padding: 0;
+  border: 0; border-radius: 50%; background: var(--surface-2); color: var(--ink);
+  cursor: pointer;
+}
+.navmore:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
 /* ── Type ── */
 .label {
@@ -311,7 +320,22 @@ body.preview .hero { min-height: 0; }
   .plans { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  nav.site a:nth-child(-n+2) { display: none; }
+  /* Phone header: the logo keeps its room and the links become one row that
+     slides sideways, faded at both edges. Nothing wraps, nothing overlaps,
+     and every link stays reachable. */
+  header.site { gap: 14px; }
+  .brand { flex: none; }
+  nav.site {
+    flex: 1 1 auto; min-width: 0; justify-content: flex-start; gap: 20px;
+    overflow-x: auto; white-space: nowrap; scrollbar-width: none;
+    padding: 6px 18px 6px 14px; margin-right: calc(-1 * var(--gutter));
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 34px), transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 34px), transparent 100%);
+  }
+  nav.site::-webkit-scrollbar { display: none; }
+  header.site.nav-slides nav.site { margin-right: 0; }
+  header.site.nav-slides:not(.nav-end) .navmore { display: grid; }
+  nav.site a { flex: none; font-size: 12px; }
   .brand img { width: 30px; height: 30px; }
   .pair { flex-wrap: wrap; }
   .pair .phone, .pair .phone:last-child { width: min(100%, 320px); margin-top: 0; }
